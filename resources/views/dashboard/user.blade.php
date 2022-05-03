@@ -110,7 +110,11 @@
       <th scope="row">1</th>
       <td>{{$d['name']}}</td>
       <td>Admin</td>
-      <td><button type="button" class="btn btn-info">Create/Delete/Show</button></td>
+      <td>
+        {{}}
+        <button type="button" class="btn btn-info btn-sm">Create</button>
+        
+      </td>
       <td>
         <a href="/useredit?id={{$d['id']}}"><button type="button" class="btn btn-danger">Edit</button></a>
         <a href="/userdelete?id={{$d['id']}}"><button type="button" class="btn btn-danger">Delete</button></a>

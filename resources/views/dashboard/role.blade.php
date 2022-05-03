@@ -146,7 +146,7 @@
           <!-----radio----->
           @foreach($permissions as $pd)
           <div class="form-check">
-               <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+               <input class="form-check-input" type="checkbox" name="permissonlist[]" value="{{$pd['id']}}" id="flexCheckDefault">
               <label class="form-check-label" for="flexCheckDefault">
                     {{$pd['name']}}
              </label>
