@@ -111,9 +111,9 @@
       <td>{{$d['name']}}</td>
       <td>Admin</td>
       <td>
-        {{}}
         <button type="button" class="btn btn-info btn-sm">Create</button>
-        
+        <button type="button" class="btn btn-info btn-sm">Delete</button>
+
       </td>
       <td>
         <a href="/useredit?id={{$d['id']}}"><button type="button" class="btn btn-danger">Edit</button></a>

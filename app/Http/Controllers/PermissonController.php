@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+//use App\Models\Role;
+//use App\Models\Permission;
 use Spatie\Permission\Traits\HasRoles;
 
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+
 use Illuminate\Http\Request;
 
 class PermissonController extends Controller
@@ -27,6 +30,14 @@ class PermissonController extends Controller
     }
 
     function Delete(Request $req){
+        $permission=Permission::find($req['id']);
+        //return $permission;
+        $role=Role::all();
+        foreach($role as $ob){
+           $id=$ob['id'];
+           $roleobj=Role::find($id);
+           $permission->removeRole($roleobj);
+        }    
         $permissionDeleteObj = Permission::find($req['id']);
         $permissionDeleteObj->delete();
         return redirect('permisson');

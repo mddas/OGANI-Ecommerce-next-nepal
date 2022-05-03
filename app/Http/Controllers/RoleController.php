@@ -40,8 +40,16 @@ class RoleController extends Controller
     }
 
     function Delete(Request $req){
+        
+        
+        $role=Role::find($req['id']);
+        $permission=Permission::All();
+        $role->revokePermissionTo($permission);
+
         $RoleObj = Role::find($req['id']);
         $RoleObj->delete();
         return redirect('role');
+        //$permission->removeRole($role);
+
     }
 }
