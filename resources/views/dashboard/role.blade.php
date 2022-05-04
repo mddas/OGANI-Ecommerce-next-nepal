@@ -114,8 +114,12 @@
   @foreach($allrole as $d)
     <tr>
       <th scope="row">{{$d['id']}}</th>
-      <td>{{ $d['name'] }}</td>
-      <td><button type="button" class="btn btn-info">Create/Delete/Show</button></td>
+      <td>{{ $d['name'] }}</td>  
+      <td>
+      @foreach($d->getPermissionNames() as $per)
+        <button type="button" class="btn btn-info btn-sm">{{$per}}</button>
+      @endforeach
+      </td>
       <td>
         <a href="roleedit/?id={{$d['id']}}"><button type="button" class="btn btn-danger">Edit</button></a>
         <a href="roledelete/?id={{$d['id']}}"><button type="button" class="btn btn-danger">Delete</button></a>

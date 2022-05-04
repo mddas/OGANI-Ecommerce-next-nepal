@@ -23,9 +23,12 @@ class RoleController extends Controller
         $rolename=$req['Name'];
         $permissonid=$req['permissonlist'];
 
-        $permission=Permission::find($permissonid[0]);
         $role=Role::create(['name' => $rolename]);
-        $role->givePermissionTo($permission);
+        foreach($permissonid as $id){
+            $permission=Permission::find($id);
+            $role->givePermissionTo($permission);
+        }
+        
         //foreach($permisson as $pd){//
             //$role->givePermissionTo($pd);
           //  return $pd;
