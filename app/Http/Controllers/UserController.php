@@ -21,11 +21,20 @@ class UserController extends Controller
         $role=$req['role'];
         $password=$req['password'];
 
+
+
+        
+        //auth()->User()->assignRole($role);
+
         $USER = new User; 
         $USER->name = $name;//$request->name; 
         $USER->email=$email;
         $USER->password=Hash::make($password);
         $USER->save();
+        $USER->assignRole($role);
+
+        
+
         return redirect('user');   
         
     }

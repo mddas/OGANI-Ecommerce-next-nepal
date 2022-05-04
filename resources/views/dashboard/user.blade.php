@@ -107,13 +107,17 @@
   <tbody>
   @foreach($data as $d)
     <tr>
-      <th scope="row">1</th>
+      <th scope="row">{{$d['id']}}</th>
       <td>{{$d['name']}}</td>
-      <td>Admin</td>
       <td>
-        <button type="button" class="btn btn-info btn-sm">Create</button>
-        <button type="button" class="btn btn-info btn-sm">Delete</button>
-
+        @foreach($d->getRoleNames() as $rol)
+        <button type="button" class="btn btn-info btn-sm">{{$rol}}</button>
+      @endforeach
+      </td>
+      <td>
+      @foreach($d->getAllPermissions() as $per)
+        <button type="button" class="btn btn-info btn-sm">{{$per['name']}}</button>
+      @endforeach
       </td>
       <td>
         <a href="/useredit?id={{$d['id']}}"><button type="button" class="btn btn-danger">Edit</button></a>
