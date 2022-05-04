@@ -91,7 +91,7 @@
    </div>
    <div class="home_content">
        <div class="left" id="text"><font color="green"><h2>USER DASHBOARD </h2></font></div>
-       <div class="left" id="add"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat"><img src="images/Add.png" height="80px" width="80px"></button></div>
+       <div class="left" id="add"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="New User Register"><img src="images/Add.png" height="80px" width="80px"></button></div>
        <div class="show">     
       </div>
   <table class="table table-striped"><!--table table-dark table-striped--->
@@ -120,7 +120,7 @@
       @endforeach
       </td>
       <td>
-        <a href="/useredit?id={{$d['id']}}"><button type="button" class="btn btn-danger">Edit</button></a>
+       <!---- <a href="/useredit?id={{$d['id']}}">----><button type="button" class="btn btn-danger" , data-toggle="modal" data-target="#exampleModal" data-whatever="Editing User">Edit</button><!---</a>--->
         <a href="/userdelete?id={{$d['id']}}"><button type="button" class="btn btn-danger">Delete</button></a>
       </td>
     </tr>
@@ -183,8 +183,8 @@ $('#exampleModal').on('show.bs.modal', function (event) {
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
-  //modal.find('.modal-title').text('New User Register md' + recipient)
-  //modal.find('.modal-body input').val(recipient)
+  modal.find('.modal-title').text(recipient)
+  modal.find('.modal-body input').val(recipient)
 })
 </script>
 <!---------modal close----->
