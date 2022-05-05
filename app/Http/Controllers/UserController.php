@@ -15,36 +15,51 @@ class UserController extends Controller
     }
 
     function Insert(Request $req){
-
         $name=$req['Name']; 
         $email=$req['email'];     
         $role=$req['role'];
-        $password=$req['password'];
-
-
-
-        
-        //auth()->User()->assignRole($role);
-
-        $USER = new User; 
-        $USER->name = $name;//$request->name; 
-        $USER->email=$email;
-        $USER->password=Hash::make($password);
-        $USER->save();
-        $USER->assignRole($role);
-
-        
-
-        return redirect('user');   
+        $password=$req['password'];  
+        $action=$req['update'];
+        if($action=="0"){      
+            //this is for inserting
+            //auth()->User()->assignRole($role);
+            $USER = new User; 
+            $USER->name = $name;//$request->name; 
+            $USER->email=$email;
+            $USER->password=Hash::make($password);
+            $USER->save();
+            $USER->assignRole($role);     
+            return redirect('user');   
+        }
+        elseif($action=="1"){
+            //this is for updating
+            $USER = USER::find($req['id']);
+            $USER->name = $name;//$request->name; 
+            $USER->email=$email;
+            if(strlen($password)>=4){
+                $USER->password=Hash::make($password);
+            }
+            $USER->save();
+            $userroleId=$USER->getRoleNames();
+            $USER->removeRole($userroleId[0]);
+            $USER->assignRole($role);     
+            return redirect('user');   
+        }
         
     }
-    function Edit(Request $req){
-
-    }
-
+  
     function Delete(Request $req){
         $UserObj = User::find($req['id']);
         $UserObj->delete();
         return redirect('user');
+    }
+    function UserEdit(Request $req){
+        $userId=$req['id'];
+        $userdetail=$user=User::find($userId);
+        $role=$user->getRoleNames();
+        if(sizeof($role)==0){
+            $role[0]="Null";
+        }
+       return view("dashboard/useredit")->with(['userdata' => $userdetail,'roles'=>Role::all(),'role'=>$role]);
     }
 }

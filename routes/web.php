@@ -31,6 +31,7 @@ Route::get('insertuser',[UserController::class,'Insert']);
 Route::get('insertrole',[RoleController::class,'Insert']);
 Route::get('useredit',[UserController::class,'Edit']);
 Route::get('userdelete',[UserController::class,'Delete']);
+Route::get('useredit',[UserController::class,'UserEdit']);
 //Role
 Route::get('role',[RoleController::class,'show']);
 Route::get('roleedit',[RoleController::class,'Edit']);

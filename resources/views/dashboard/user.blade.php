@@ -120,7 +120,7 @@
       @endforeach
       </td>
       <td>
-       <!---- <a href="/useredit?id={{$d['id']}}">----><button type="button" class="btn btn-danger" , data-toggle="modal" data-target="#exampleModal" data-whatever="Editing User">Edit</button><!---</a>--->
+        <a href="/useredit?id={{$d['id']}}"><button type="button" class="btn btn-danger" , data-toggle="modal" data-target="#exampleModal" data-whatever="Editing User">Edit</button>
         <a href="/userdelete?id={{$d['id']}}"><button type="button" class="btn btn-danger">Delete</button></a>
       </td>
     </tr>
@@ -162,6 +162,7 @@
             <label for="message-text" class="col-form-label">Password</label>
             <input type="password" class="form-control" id="message-text" name="password">
           </div>
+          <input type="hidden" name="update" value="0">
           <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -184,7 +185,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
   modal.find('.modal-title').text(recipient)
-  modal.find('.modal-body input').val(recipient)
+  //modal.find('.modal-body input').val(recipient)
 })
 </script>
 <!---------modal close----->
