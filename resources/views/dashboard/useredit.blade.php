@@ -38,6 +38,7 @@
             <label for="recipient-name" class="col-form-label">Name</label>
             <input type="text" class="form-control" id="recipient-name" name="Name" value="{{$userdata['name']}}">
           </div>
+          @can('superadmin')
           <div class="form-group">
             <label for="message-text" class="col-form-label">Role</label>       
             <select class="form-select" aria-label="Default select example" name="role">
@@ -50,6 +51,7 @@
                 @endforeach
              </select>
            </div>
+           @endcan
           <div class="form-group">
             <label for="message-text" class="col-form-label">Email</label>
             <input type="email" class="form-control" id="message-text" name="email" value="{{$userdata['email']}}">

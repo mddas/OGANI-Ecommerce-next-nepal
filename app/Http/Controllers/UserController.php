@@ -16,8 +16,13 @@ class UserController extends Controller
 
     function Insert(Request $req){
         $name=$req['Name']; 
-        $email=$req['email'];     
-        $role=$req['role'];
+        $email=$req['email'];  
+        if(isset($req['role'])){   
+            $role=$req['role'];
+        }
+        else{
+            $role="null";
+        }
         $password=$req['password'];  
         $action=$req['update'];
         if($action=="0"){      
@@ -41,8 +46,10 @@ class UserController extends Controller
             }
             $USER->save();
             $userroleId=$USER->getRoleNames();
-            $USER->removeRole($userroleId[0]);
-            $USER->assignRole($role);     
+            if($role!="null"){
+                $USER->removeRole($userroleId[0]);//generating error
+                $USER->assignRole($role);     
+            }
             return redirect('user');   
         }
         

@@ -52,7 +52,7 @@
         <span class="tooltip">PERMISSON</span>
       </li>
       <li>
-        <a href="setting">
+        <a href="/dashboard">
          <i class='bx bx-cog'></i>
          <span class="links_name">SETTING</span>
         </a>
@@ -74,6 +74,16 @@
    </div>
    <div class="home_content">
      <div class="text">Dashboard</div>
+     <div>{{ Auth::user()->name }}</div>
+     <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
      
 <script src="main.js"></script>
 </body>

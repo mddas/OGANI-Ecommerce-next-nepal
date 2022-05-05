@@ -48,7 +48,7 @@
           <span class="tooltip">Search</span>
        </li>
        <li>
-        <a href="#">
+        <a href="/dashboard">
          <i class='bx bx-grid-alt'></i>
          <span class="links_name">DASHBOARD</span>
         </a>
@@ -76,7 +76,7 @@
         <span class="tooltip">PERMISSON</span>
       </li>
       <li>
-        <a href="setting">
+        <a href="/dashboard">
          <i class='bx bx-cog'></i>
          <span class="links_name">SETTING</span>
         </a>
