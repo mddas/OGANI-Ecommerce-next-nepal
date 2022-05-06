@@ -20,14 +20,33 @@ class RoleController extends Controller
         //return view("dashboard/role",['allrole'=>$allrole]);
     }
     function Insert(Request $req){
-        $rolename=$req['Name'];
-        $permissonid=$req['permissonlist'];
-
-        $role=Role::create(['name' => $rolename]);
+        
+        
+        $isupdate=$req['update'];
+        if($isupdate=="0"){
+            $permissonid=$req['permissonlist'];
+            $rolename=$req['Name'];
+            $role=Role::create(['name' => $rolename]);
         foreach($permissonid as $id){
             $permission=Permission::find($id);
             $role->givePermissionTo($permission);
         }
+    }
+    elseif($isupdate=="1"){
+        //return "role is updating";
+        //remove all permission from role
+        // and re recreate all role with permission i.e update
+        $permissonid=$req['permissonlist'];
+        $roleobj=Role::find($req['roleid']);
+        $permission=Permission::All();
+        //return $roleobj;
+        $roleobj->revokePermissionTo($permission);
+        foreach($permissonid as $id){
+            $permissionob=Permission::find($id);
+            $roleobj->givePermissionTo($permissionob);
+        }
+
+    }
         
         //foreach($permisson as $pd){//
             //$role->givePermissionTo($pd);
@@ -38,12 +57,22 @@ class RoleController extends Controller
         //$ROLE->save();
         return redirect('role');
     }
-    function Edit(Request $req){
+
+    function edit(Request $req){
+        $roleobj = Role::find($req['id']);
+        $role_per_Permission = $roleobj->getAllPermissions();
+        // dd($role_per_Permission);s
+        $permissions = Permission::get();
+        //return $role_per_Permission;
+        $all_roles_except_a_and_b = Permission::whereNotIn('name', $role_per_Permission)->get();
+        //return $all_roles_except_a_and_b;
+
+        return view("dashboard/roleedit")->with(['allrole'=>Role::find($req['id']), 'permissions' => $permissions,'all_roles_except_a_and_b' => $all_roles_except_a_and_b, 'role_per_Permission'=>$role_per_Permission]);
+        
 
     }
 
-    function Delete(Request $req){
-        
+    function Delete(Request $req){        
         
         $role=Role::find($req['id']);
         $permission=Permission::All();

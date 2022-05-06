@@ -47,8 +47,10 @@ class UserController extends Controller
             $USER->save();
             $userroleId=$USER->getRoleNames();
             if($role!="null"){
-                $USER->removeRole($userroleId[0]);//generating error
-                $USER->assignRole($role);     
+                if(sizeof($userroleId)!=0){
+                     $USER->removeRole($userroleId[0]);//generating error    
+                } 
+                $USER->assignRole($role);
             }
             return redirect('user');   
         }
