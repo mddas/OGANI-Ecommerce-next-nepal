@@ -46,10 +46,14 @@ Route::get('permissondelete',[PermissonController::class,'Delete']);
 
 //category 
 Route::get('category',[CategoryController::class,'show']);
+Route::post('insertcategory',[CategoryController::class,'insert']);
 
 
 //subcategory
 Route::get('subcategory',[SubcategoryController::class,'show']);
+Route::post('insertsubcategory',[SubcategoryController::class,'insert']);
+Route::get('deletesubcategory',[SubcategoryController::class,'deleteSubcategory']);
+
 
 
 

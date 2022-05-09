@@ -13,23 +13,27 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Sub-Category Name</th>
+      <th  scope="col">Image</th>
       <th scope="col">Category Name</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
-    <tr id="">
+    @foreach($subcategory as $subcat)
+    <tr id="{{$subcat['id']}}">
       <th scope="row">1</th>
-      <td>Laptop</td>  
+      <td>{{$subcat['name']}}</td>  
+      <td><img src="/categoryimage/{{$subcat['image']}}" height="70px" width="50px"></td>
       <td>     
         <button type="button" class="btn btn-info btn-sm">Electronics</button>
       </td>
       <td>
         <a href="#"><button type="button" class="btn btn-danger">Edit</button></a>
   
-        <a href="#"><button type="button" class="btn btn-danger" onclick='deLete("id","/roledelete")'>Delete</button></a>
+        <a href="#"><button type="button" class="btn btn-danger" onclick='deLete({{ $subcat["id"]}},"/deletesubcategory")'>Delete</button></a>
       </td>
     </tr>
+    @endforeach
       
   </tbody>
 </table>  
@@ -46,16 +50,16 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="insertrole" method="get">
+        <form action="insertsubcategory" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Category Name</label>
-            <input type="text" class="form-control" id="recipient-name" name="Name">
+            <input type="text" class="form-control" id="recipient-name" name="name">
           </div>
 
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Select category</label>
-            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="category">
               <option value="null" selected>category name</option>
               <option value="1">One</option>
               <option value="2">Two</option>

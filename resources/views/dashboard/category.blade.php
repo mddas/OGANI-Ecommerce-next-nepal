@@ -18,18 +18,20 @@
     </tr>
   </thead>
   <tbody>
+    @foreach($categories as $cat)
     <tr id="">
       <th scope="row">1</th>
-      <td>Electronics</td>  
+      <td>{{$cat['name']}}</td>  
       <td>     
         <button type="button" class="btn btn-info btn-sm">laptop</button>
       </td>
       <td>
         <a href="#"><button type="button" class="btn btn-danger">Edit</button></a>
   
-        <a href="#"><button type="button" class="btn btn-danger" onclick='deLete("id","/roledelete")'>Delete</button></a>
+        <a href="#"><button type="button" class="btn btn-danger" onclick='deLete({{ $cat["id"]}},"/deletecategory")'>Delete</button></a>
       </td>
     </tr>
+    @endforeach
       
   </tbody>
 </table>  
@@ -45,17 +47,16 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="insertrole" method="get">
+        <form enctype="multipart/form-data" action="insertcategory" method="POST">
           @csrf
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Category Name</label>
-            <input type="text" class="form-control" id="recipient-name" name="Name">
+            <input type="text" class="form-control" id="recipient-name" name="name">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Select Image</label>
-            <input type="file" class="form-control" id="recipient-name" name="file">
-          </div>
-         
+            <input type="file" class="form-control" id="recipient-name" name="image">
+          </div>       
         
          
          <input type="hidden" name="update" value="0">
