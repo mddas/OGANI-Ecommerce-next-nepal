@@ -58,4 +58,9 @@ class CategoryController extends Controller
         //return $file;//->getClientOriginalName();
 
     }
+    public function deleteCategory(Request $req){
+        $categoryObj=Category::find($req['id']);
+        $categoryObj->delete();
+        redirect ('category');
+    }
 }

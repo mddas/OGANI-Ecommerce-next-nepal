@@ -25,7 +25,7 @@
       <td>{{$subcat['name']}}</td>  
       <td><img src="/categoryimage/{{$subcat['image']}}" height="70px" width="50px"></td>
       <td>     
-        <button type="button" class="btn btn-info btn-sm">Electronics</button>
+        <button type="button" class="btn btn-info btn-sm">Null</button>
       </td>
       <td>
         <a href="#"><button type="button" class="btn btn-danger">Edit</button></a>
@@ -61,9 +61,10 @@
             <label for="recipient-name" class="col-form-label">Select category</label>
             <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="category">
               <option value="null" selected>category name</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              @foreach($category as $cat)
+              <option value="{{$cat['id']}}">{{$cat['name']}}</option>
+              @endforeach
+      
             </select>
           </div>
 

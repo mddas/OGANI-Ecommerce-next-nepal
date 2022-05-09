@@ -12,18 +12,20 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Role Name</th>
+      <th scope="col">Category Name</th>
+      <th scope="col">Image</th>
       <th scope="col">Sub-Category</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
     @foreach($categories as $cat)
-    <tr id="">
+    <tr id="{{$cat['id']}}">
       <th scope="row">1</th>
       <td>{{$cat['name']}}</td>  
+      <td><img src="/categoryimage/{{$cat['image']}}" height="70px" width="50px"></td>
       <td>     
-        <button type="button" class="btn btn-info btn-sm">laptop</button>
+        <button type="button" class="btn btn-info btn-sm">Null</button>
       </td>
       <td>
         <a href="#"><button type="button" class="btn btn-danger">Edit</button></a>

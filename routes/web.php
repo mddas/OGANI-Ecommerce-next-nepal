@@ -47,6 +47,7 @@ Route::get('permissondelete',[PermissonController::class,'Delete']);
 //category 
 Route::get('category',[CategoryController::class,'show']);
 Route::post('insertcategory',[CategoryController::class,'insert']);
+Route::get('deletecategory',[CategoryController::class,'deleteCategory']);
 
 
 //subcategory

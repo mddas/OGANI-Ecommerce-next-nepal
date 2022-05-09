@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Subcategory;
+use App\Models\Category;
+
 
 
 class SubcategoryController extends Controller
@@ -11,7 +13,7 @@ class SubcategoryController extends Controller
     public function show()
     {
 
-        return view("dashboard.subcategory")->with(['subcategory'=>Subcategory::all()]);
+        return view("dashboard.subcategory")->with(['subcategory'=>Subcategory::all(),'category'=>Category::all()]);
     }
 
     public function insert(Request $req){
