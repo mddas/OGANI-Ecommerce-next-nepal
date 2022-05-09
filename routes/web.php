@@ -5,6 +5,8 @@ use App\Http\Controllers\UserController;
 
 use App\Http\Controllers\PermissonController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubcategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,4 +43,14 @@ Route::get('permisson',[PermissonController::class,'show']);
 Route::get('insertpermisson',[PermissonController::class,'Insert']);
 Route::get('permissonedit',[PermissonController::class,'Edit']);
 Route::get('permissondelete',[PermissonController::class,'Delete']);
+
+//category 
+Route::get('category',[CategoryController::class,'show']);
+
+
+//subcategory
+Route::get('subcategory',[SubcategoryController::class,'show']);
+
+
+
 require __DIR__.'/auth.php';

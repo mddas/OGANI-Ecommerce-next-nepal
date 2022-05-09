@@ -2,46 +2,44 @@
 
 @section('home_content')
    <div class="home_content">
-       <div class="left" id="text"><font color="green"><h2>ROLE</h2></font></div>
+       <div class="left" id="text"><font color="green"><h2>CATEGORY</h2></font></div>
        <div class="left" id="add"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat"><img src="images/Add.png" height="80px" width="80px"></button></div>
     <div class="show">     
       </div>
-  <table class="table table-striped"><!--table table-dark table-striped--->
+
+  <!---category list---->
+<table class="table table-striped"><!--table table-dark table-striped--->
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Role Name</th>
-      <th scope="col">Permissons</th>
+      <th scope="col">Sub-Category</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
-  @foreach($allrole as $d)
-    <tr id="{{$d['id']}}">
-      <th scope="row">{{$d['id']}}</th>
-      <td>{{ $d['name'] }}</td>  
-      <td>
-      @foreach($d->getPermissionNames() as $per)
-        <button type="button" class="btn btn-info btn-sm">{{$per}}</button>
-      @endforeach
+    <tr id="">
+      <th scope="row">1</th>
+      <td>Electronics</td>  
+      <td>     
+        <button type="button" class="btn btn-info btn-sm">laptop</button>
       </td>
       <td>
-        <a href="roleedit/?id={{$d['id']}}"><button type="button" class="btn btn-danger">Edit</button></a>
-        <!----roledelete/?id={{$d['id']}}--->
-        <a href="#"><button type="button" class="btn btn-danger" onclick='deLete({{ $d["id"]}},"/roledelete")'>Delete</button></a>
+        <a href="#"><button type="button" class="btn btn-danger">Edit</button></a>
+  
+        <a href="#"><button type="button" class="btn btn-danger" onclick='deLete("id","/roledelete")'>Delete</button></a>
       </td>
     </tr>
-  @endforeach
       
   </tbody>
-</table>
+</table>  
 <!---------modal------------>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Register New Role</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Register New Category</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -50,19 +48,17 @@
         <form action="insertrole" method="get">
           @csrf
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Role Name</label>
+            <label for="recipient-name" class="col-form-label">Category Name</label>
             <input type="text" class="form-control" id="recipient-name" name="Name">
           </div>
-          <!-----radio----->
-          @foreach($permissions as $pd)
-          <div class="form-check">
-               <input class="form-check-input" type="checkbox" name="permissonlist[]" value="{{$pd['id']}}" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                    {{$pd['name']}}
-             </label>
-           </div>
-         @endforeach
-         <input type="text" name="update" value="0">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Select Image</label>
+            <input type="file" class="form-control" id="recipient-name" name="file">
+          </div>
+         
+        
+         
+         <input type="hidden" name="update" value="0">
 
           <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

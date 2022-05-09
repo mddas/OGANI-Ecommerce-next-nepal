@@ -1,4 +1,5 @@
-@include('dashboard.mainmenu');
+@extends('layouts.master')
+@section('home_content')
    <div class="home_content">
        <div class="left" id="text"><font color="green"><h2>USER DASHBOARD </h2></font></div>
        <div class="left" id="add">
@@ -20,7 +21,7 @@
   </thead>
   <tbody>
   @foreach($data as $d)
-    <tr>
+    <tr id="{{$d['id']}}">
       <th scope="row">{{$d['id']}}</th>
       <td>{{$d['name']}}</td>
       <td>
@@ -38,7 +39,8 @@
         <a href="/useredit?id={{$d['id']}}"><button type="button" class="btn btn-danger" >Edit</button>
         @endcan
         @can('delete')
-        <a href="/userdelete?id={{$d['id']}}"><button type="button" class="btn btn-danger">Delete</button></a>
+        <!----/userdelete?id={{$d['id']}}---->
+        <a href="#"><button type="button" class="btn btn-danger" onclick='deLete({{ $d["id"]}},"/userdelete")'>Delete</button></a>
         @endcan
       </td>
     </tr>
@@ -107,7 +109,5 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 })
 </script>
 <!---------modal close----->
-<script src="main.js"></script>
-</body>
-</html>
+@endsection
 

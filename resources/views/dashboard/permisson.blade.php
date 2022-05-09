@@ -1,4 +1,7 @@
-@include('dashboard.mainmenu')
+
+@extends('layouts.master')
+
+@section('home_content')
    <div class="home_content">
        <div class="left" id="text"><font color="green"><h2>PERMISSON</h2></font></div>
        <div class="left" id="add">@can('create')<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat"><img src="images/Add.png" height="80px" width="80px"></button>@endcan</div>
@@ -14,7 +17,7 @@
   </thead>
   <tbody>
   @foreach($permissondata as $d)
-    <tr>
+    <tr id="{{$d['id']}}">
       <th scope="row">{{$d['id']}}</th>
       <td>{{$d['name']}}</td>
       <td>
@@ -22,7 +25,8 @@
         <a href="/permissonedit?id={{$d['id']}}"><button id="{{$d['id']}}" type="button" class="btn btn-danger">Edit</button></a>
         @endcan
         @can('delete')
-        <a href="/permissondelete?id={{$d['id']}}"><button id="{{$d['id']}}" type="button" class="btn btn-danger">Delete</button></a>
+        <!---/permissondelete?id={{$d['id']}}---->
+        <a href="#"><button type="button" class="btn btn-danger" onclick='deLete({{$d["id"]}},"/permissondelete")'>Delete</button></a>
         @endcan
       </td>
     </tr>
@@ -74,7 +78,6 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 })
 </script>
 <!---------modal close----->
-<script src="main.js"></script>
-</body>
-</html>
+@endsection
+
 
