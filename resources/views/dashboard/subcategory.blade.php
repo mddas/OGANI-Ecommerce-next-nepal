@@ -21,11 +21,11 @@
   <tbody>
     @foreach($subcategory as $subcat)
     <tr id="{{$subcat['id']}}">
-      <th scope="row">1</th>
+      <th scope="row">{{$subcat['id']}}</th>
       <td>{{$subcat['name']}}</td>  
       <td><img src="/categoryimage/{{$subcat['image']}}" height="70px" width="50px"></td>
       <td>     
-        <button type="button" class="btn btn-info btn-sm">Null</button>
+        <button type="button" class="btn btn-info btn-sm">{{App\Models\Subcategory::getCateGoryName($subcat->cateGory->category_id)}}</button>
       </td>
       <td>
         <a href="#"><button type="button" class="btn btn-danger">Edit</button></a>
