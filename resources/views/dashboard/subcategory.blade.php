@@ -25,7 +25,12 @@
       <td>{{$subcat['name']}}</td>  
       <td><img src="/categoryimage/{{$subcat['image']}}" height="70px" width="50px"></td>
       <td>     
-        <button type="button" class="btn btn-info btn-sm">{{App\Models\Subcategory::getCateGoryName($subcat->cateGory->category_id)}}</button>
+        <button type="button" class="btn btn-info btn-sm">
+          @if($subcat->cateGory!=null)        {{App\Models\Subcategory::getCateGoryName($subcat->cateGory->category_id)}}
+          @else
+            Empty
+          @endif
+        </button>
       </td>
       <td>
         <a href="#"><button type="button" class="btn btn-danger">Edit</button></a>

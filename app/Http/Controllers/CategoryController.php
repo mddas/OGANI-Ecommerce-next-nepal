@@ -37,41 +37,11 @@ class CategoryController extends Controller
             $Category->save();
         }
         return redirect('category');
-        ///$data->save();
-        //return redirect()->route('images.view');
-        /*
-
-        echo 'File Name: '.$file->getClientOriginalName();
-        echo '<br>';
-   
-        //Display File Extension
-        echo 'File Extension: '.$file->getClientOriginalExtension();
-        echo '<br>';
-   
-        //Display File Real Path
-        echo 'File Real Path: '.$file->getRealPath();
-        echo '<br>';
-   
-        //Display File Size
-        echo 'File Size: '.$file->getSize();
-        echo '<br>';
-   
-        //Display File Mime Type
-        echo 'File Mime Type: '.$file->getMimeType();
-   
-        //Move Uploaded File
-        $destinationPath = 'uploads';
-        $file->move($destinationPath,$file->getClientOriginalName());
-        */
-
-
-        //return $categoryName."::".$req['file'];
-        //return $file;//->getClientOriginalName();
 
     }
-    public function deleteCategory(Request $req){
+    public function deleteCategory(Request $req){         Categoryhassubcategory::where('category_id', $req['id'])->delete();
         $categoryObj=Category::find($req['id']);
         $categoryObj->delete();
-        redirect ('category');
+        return redirect ('category');
     }
 }

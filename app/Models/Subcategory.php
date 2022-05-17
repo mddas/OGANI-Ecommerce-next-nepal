@@ -19,6 +19,20 @@ class Subcategory extends Model
     }
     public static function getCateGoryName(int $categoryid)
     {
-        return Category::find($categoryid)['name'];
+        try{
+            $cat=Category::where('id',$categoryid)->count();
+            if($cat > 0){
+                $cat = Category::where('id',$categoryid)->first();
+                return $cat['name'];
+            }else{
+                return 'Empty';
+            }
+        }
+        catch(Exception $e){
+            dd($e->getMesage());    
+            return "null";
+        }
+
+
     }
 }

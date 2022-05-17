@@ -13,10 +13,14 @@ class SubcategoryController extends Controller
 {
     public function show()
     {
+        //if(Subcategory::find(26)->cateGory==null){
+          //      return "md you are null";
+        //}
+        //dd(Subcategory::find(2)->cateGory->category_id);
         //dd(Category::with('subCategory')->get());
         //return cateGorymd();
         //return Subcategory::cateGory;
-        return view("dashboard.subcategory")->with(['subcategory'=>Subcategory::all(),'category'=>Category::all()]);
+      return view("dashboard.subcategory")->with(['subcategory'=>Subcategory::all(),'category'=>Category::all()]);
     }
 
     public function insert(Request $req){
