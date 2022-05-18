@@ -17,15 +17,28 @@ class PermissonController extends Controller
         return view("dashboard/permisson",["permissondata"=>$allpermisson]);
     }
     function Insert(Request $req){
-        $permissonName=$req['Name'];
-        $permission = Permission::create(['name' => $permissonName]);
-        //$PERMISSON = new Permission; 
-        //$PERMISSON->name = $permissonName;//$request->name; 
-        //$PERMISSON->save();
-        return redirect('permisson');
+        if($req['update']=='0'){
+            $permissonName=$req['Name'];
+            $permission = Permission::create(['name' => $permissonName]);
+            //$PERMISSON = new Permission; 
+            //$PERMISSON->name = $permissonName;//$request->name; 
+            //$PERMISSON->save();
+            return redirect('permisson');
+        }
+        elseif($req['update']=='1')
+        {
+            $permissionobj=Permission::find($req['permissonid']);
+            //return $req['permissonid'];
+            $permissionobj->name=$req['Name'];
+            $permissionobj->save();
+            return redirect('permisson');
+
+        }
+
     }
     
     function Edit(Request $req){
+        return view("dashboard/permissonedit")->with(['id'=>$req['id'],  'name' => $req['name']]);// , ['id'=>$req['id'],'name'=>$req['name']]);
 
     }
 

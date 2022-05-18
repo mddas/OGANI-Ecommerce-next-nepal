@@ -24,28 +24,49 @@ class SubcategoryController extends Controller
     }
 
     public function insert(Request $req){
-        $subCategoryName=$req['name'];
-        $categoryID=$req['category'];        
+        //dd($req);
+        if($req['update']=='0'){
+            $subCategoryName=$req['name'];
+            $categoryID=$req['category'];        
 
        
-        if($req->file('image')){
-            $file= $req->file('image');
-            $fileName= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('categoryimage'), $fileName);
-            $data['image']= $fileName;
+            if($req->file('image')){
+                $file= $req->file('image');
+                $fileName= date('YmdHi').$file->getClientOriginalName();
+                $file-> move(public_path('categoryimage'), $fileName);
+                $data['image']= $fileName;
 
-            $Subcategory = new Subcategory;
-            $Subcategory->name = $subCategoryName;
-            $Subcategory->image=$fileName;
-            $Subcategory->save();
+                $Subcategory = new Subcategory;
+                $Subcategory->name = $subCategoryName;
+                $Subcategory->image=$fileName;
+                $Subcategory->save();
+             }
+            //insert category id and subcategory to the table Categoryhassubcategory.
+            $categoryHasSub=new Categoryhassubcategory;
+            $categoryHasSub->category_id=$categoryID;
+            $categoryHasSub->subcategory_id=$Subcategory->id;
+            $categoryHasSub->save();
+
+            return redirect('subcategory');
         }
-        //insert category id and subcategory to the table Categoryhassubcategory.
-        $categoryHasSub=new Categoryhassubcategory;
-        $categoryHasSub->category_id=$categoryID;
-        $categoryHasSub->subcategory_id=$Subcategory->id;
-        $categoryHasSub->save();
+        else if($req['update']=='1'){
+            try{
+                $subcategoryObj=Subcategory::find($req['subcategory_id']); $subcategoryObj->name=$req['name'];
+                    $subcategoryObj->save();
+                    //dd($subcategoryObj);
 
-        return redirect('subcategory');
+            }
+            catch(Exception $e){
+                 dd($e->getMesage());
+             }
+              $categoryHasSub=Categoryhassubcategory::where('subcategory_id',$req['subcategory_id'])->first();
+              //return $categoryHasSub; 
+              $categoryHasSub->category_id = $req['category'];
+              $categoryHasSub->save();
+              //dd($categoryHasSub);
+              return redirect('subcategory'); 
+            }
+
     }
 
     public function deleteSubcategory(Request $req){

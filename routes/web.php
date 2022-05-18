@@ -7,6 +7,7 @@ use App\Http\Controllers\PermissonController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,7 +55,10 @@ Route::get('deletecategory',[CategoryController::class,'deleteCategory']);
 Route::get('subcategory',[SubcategoryController::class,'show']);
 Route::post('insertsubcategory',[SubcategoryController::class,'insert']);
 Route::get('deletesubcategory',[SubcategoryController::class,'deleteSubcategory']);
+Route::get('subcategoryedit',[SubcategoryController::class,'eDit']);
 
+//Search by Date
+Route::get('search',[SearchController::class,'index']);
 
 
 

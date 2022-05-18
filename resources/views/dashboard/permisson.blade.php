@@ -22,7 +22,7 @@
       <td>{{$d['name']}}</td>
       <td>
         @can('edit')
-        <a href="/permissonedit?id={{$d['id']}}"><button id="{{$d['id']}}" type="button" class="btn btn-danger">Edit</button></a>
+        <a href="/permissonedit?id={{$d['id']}}&name={{$d['name']}}"><button id="{{$d['id']}}" type="button" class="btn btn-danger">Edit</button></a>
         @endcan
         @can('delete')
         <!---/permissondelete?id={{$d['id']}}---->
@@ -51,7 +51,7 @@
             <label for="recipient-name" class="col-form-label">Permisson Name</label>
             <input type="text" class="form-control" id="recipient-name" name="Name">
           </div>
-          
+          <input type="hidden" name="update" value="0">
           <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Submit</button>

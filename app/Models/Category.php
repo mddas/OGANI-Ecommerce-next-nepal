@@ -16,7 +16,11 @@ class Category extends Model
         return $this->hasMany(Categoryhassubcategory::class);
     }
     public static function getSubCateGoryName(int $subcategoryid){
-        return Subcategory::find($subcategoryid)['name'];
+        $count=Subcategory::where('id' , $subcategoryid)->count();
+        if($count>0){
+            $subcat = Subcategory::where('id' , $subcategoryid)->first();
+             return $subcat['name'];
+        }
     }
 
 
