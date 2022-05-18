@@ -3,7 +3,7 @@
 @section('home_content')
    <div class="home_content">
        <div class="left" id="text"><font color="green"><h2>CATEGORY</h2></font></div>
-       <div class="left" id="add"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat"><img src="images/Add.png" height="80px" width="80px"></button></div>
+       <div class="left" id="add"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat" data-update="0"><img src="images/Add.png" height="80px" width="80px"></button></div>
     <div class="show">     
       </div>
 
@@ -30,7 +30,7 @@
         @endforeach
       </td>
       <td>
-        <a href="#"><button type="button" class="btn btn-danger">Edit</button></a>
+        <a href="#"><button type="button" class="btn btn-danger" data-target="#exampleModal" data-toggle="modal" data-title="Updating" data-id="{{$cat['id']}}" data-img="{{$cat['image']}}" data-update="1" data-name="{{$cat['name']}}">Edit</button></a>
   
         <a href="#"><button type="button" class="btn btn-danger" onclick='deLete({{ $cat["id"]}},"/deletecategory")'>Delete</button></a>
       </td>
@@ -55,7 +55,7 @@
           @csrf
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Category Name</label>
-            <input type="text" class="form-control" id="recipient-name" name="name">
+            <input id="name" type="text" class="form-control" id="recipient-name" name="name">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Select Image</label>
@@ -63,7 +63,9 @@
           </div>       
         
          
-         <input type="hidden" name="update" value="0">
+         <input id="update" type="hidden" name="update" value="0">
+         <input id="id" type="hidden" name="id" value="0">
+
 
           <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -85,11 +87,25 @@
 $('#exampleModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
   var recipient = button.data('whatever') // Extract info from data-* attributes
+  var update=button.data('update')
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
-  //modal.find('.modal-title').text('New User Register md' + recipient)
-  //modal.find('.modal-body input').val(recipient)
+  if(update=="0"){
+  }
+  else if(update=="1"){
+    category=button.data('name').trim()
+    id=button.data('id');
+    modal.find('.modal-title').text('Updating category')
+    modal.find('#name').val(category)
+    modal.find('#update').val("1");
+    modal.find('#id').val(id);
+
+
+  }
+  
+  
+
 })
 </script>
 
