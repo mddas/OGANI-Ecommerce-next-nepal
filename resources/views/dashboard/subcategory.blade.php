@@ -128,7 +128,6 @@
     image=button.data('img');
     document.getElementById("mySelect").value=category.trim();//category;
     document.getElementById('modal_image').src="/categoryimage/"+image;
-///categoryimage/{{$subcat['image']}}
 
   }
  

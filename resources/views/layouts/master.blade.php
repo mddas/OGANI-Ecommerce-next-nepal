@@ -131,6 +131,14 @@
 
 </li>
 
+<li class="yes" id="subcategory">
+	<a href="/product">
+	 <i class='bx bx-cog'></i>
+	 <span class="links_name">PRODUCT</span>
+ </a>
+ <span class="tooltip">PRODUCT</span>
+</li>
+
 </ul>
 <div class="content">
  <div class="user">

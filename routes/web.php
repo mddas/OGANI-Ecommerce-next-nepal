@@ -8,7 +8,8 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\SearchController;
-
+use App\Http\Controllers\ProductController;
+            
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,6 +61,10 @@ Route::get('subcategoryedit',[SubcategoryController::class,'eDit']);
 //Search by Date
 Route::get('search',[SearchController::class,'index']);
 
-
+//product
+Route::get('product' ,[ProductController::class , 'index']);
+Route::get('productadd' ,[ProductController::class, 'insert']);
+Route::get('productdelete', [ProductController::class , 'destroy']);
+//Route::get('productedit' , [ProductController::class , ''])
 
 require __DIR__.'/auth.php';
