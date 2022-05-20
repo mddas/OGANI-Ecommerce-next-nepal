@@ -2,7 +2,7 @@
 
 @section('home_content')
    <div class="home_content">
-       <div class="left" id="text"><font color="green"><h2>PRODUCTS</h2></font></div>
+       <div class="left" id="text"><font color="green"><h2>CARRIAGE</h2></font></div>
        @if(Illuminate\Support\Facades\Session::has('insertMessage'))
         <p class="left alert {{ Session::get('alert-class', 'alert-info') }}" style="margin-left: 300px">{{ Illuminate\Support\Facades\Session::get('insertMessage') }}</p>
       @endif
@@ -15,7 +15,9 @@
         </ul>
     </div>
 @endif
+    @can("md")
        <div class="left" id="add"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="none" data-update="0"><img src="images/Add.png" height="80px" width="80px"></button></div>
+    @endcan
     <div class="show">     
       </div>
   <table class="table table-striped"><!--table table-dark table-striped--->
@@ -23,10 +25,9 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Product Name</th>
-      <th scope="col">Price</th>
-      <th scope="col">Category</th>
-      <th scope="col">Subcategory</th>
       <th scope="col">Image</th>
+      <th scope="col">Price</th>
+      <th scope="col">Customer Name</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -34,21 +35,16 @@
     @foreach($alldata as $data)
     <tr id="{{$data['id']}}">
       <th scope="row">{{$data['id']}}</th>
-      <td>{{$data['name']}}</td>  
-      <td>Rs.{{$data['price']}}</td>
-      <td>
-        <button type="button" class="btn btn-info btn-sm">{{$data->getCategory->name}}</button>
-      </td>
-      <td>
-        <button type="button" class="btn btn-info btn-sm">{{$data->getSubcategory->name}}</button>
-      </td>
+      <td>{{$data->product->name}}</td>  
       <td>
         <img src="images" alt="image">
       </td>
+      <td>{{$data->product->price}}</td>
+      <td>{{$data->user->name}}</td>
       <td>
-        <a href="#"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-name="{{$data['name']}}" data-price="{{$data['price']}}" data-description="{{$data['description']}}" data-category="{{$data['category_id']}}" data-subcategory="{{$data['subcategory_id']}}" data-update="1" data-id="{{$data['id']}}">Edit</button></a>
+        <a href="#"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-name="$data['name']" data-price="$data['price']" data-description="$data['description']" data-category="$data['category_id']" data-subcategory="$data['subcategory_id']" data-update="1" data-id="$data['id']">Edit</button></a>
         <!----roledelete/?id=$d['id']--->
-        <a href="#"><button type="button" class="btn btn-danger" onclick='deLete("{{$data["id"]}}","/productdelete")'>Delete</button></a>
+        <a href="#"><button type="button" class="btn btn-danger" onclick='deLete("{{$data["id"]}}","/cartdelete")'>Delete</button></a>
       </td>
     </tr>
     @endforeach
@@ -147,7 +143,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
   //modal.find('.modal-body input').val(recipient)
 
   if(update=="0"){
-  
+    alert("building")
   }
   else if(update=="1") {
     var productName=button.data("name");

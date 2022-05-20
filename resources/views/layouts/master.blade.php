@@ -131,12 +131,20 @@
 
 </li>
 
-<li class="yes" id="subcategory">
+<li class="yes" id="product">
 	<a href="/product">
 	 <i class='bx bx-cog'></i>
 	 <span class="links_name">PRODUCT</span>
  </a>
  <span class="tooltip">PRODUCT</span>
+</li>
+
+<li class="yes" id="cart">
+	<a href="/cart">
+	 <i class='bx bx-cog'></i>
+	 <span class="links_name">CART</span>
+ </a>
+ <span class="tooltip">CART</span>
 </li>
 
 </ul>

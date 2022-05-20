@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
             
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +66,10 @@ Route::get('search',[SearchController::class,'index']);
 Route::get('product' ,[ProductController::class , 'index']);
 Route::get('productadd' ,[ProductController::class, 'insert']);
 Route::get('productdelete', [ProductController::class , 'destroy']);
-//Route::get('productedit' , [ProductController::class , ''])
+
+//cart
+Route::get('cart',[CartController::class, 'index']);
+Route::get('cartdelete' ,[CartController::class , 'destroy']);
+
 
 require __DIR__.'/auth.php';

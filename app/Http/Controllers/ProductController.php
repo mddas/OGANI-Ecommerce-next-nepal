@@ -9,7 +9,7 @@ use App\Models\Product;
 class ProductController extends Controller
 {
     public function index(){
-        //dd(Product::all());
+
         return view('dashboard/product')->with(["alldata"=>Product::all()]);   
     }
 
