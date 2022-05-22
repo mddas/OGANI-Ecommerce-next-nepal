@@ -132,7 +132,7 @@
 </li>
 
 <li class="yes" id="product">
-	<a href="/product">
+	<a href="/products">
 	 <i class='bx bx-cog'></i>
 	 <span class="links_name">PRODUCT</span>
  </a>

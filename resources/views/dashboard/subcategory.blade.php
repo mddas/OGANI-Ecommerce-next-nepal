@@ -23,7 +23,7 @@
     <tr id="{{$subcat['id']}}">
       <th scope="row">{{$subcat['id']}}</th>
       <td>{{$subcat['name']}}</td>  
-      <td><img src="/categoryimage/{{$subcat['image']}}" height="70px" width="50px"></td>
+      <td><img src="/subcategoryimage/{{$subcat['image']}}" height="70px" width="50px"></td>
       <td>     
         <button type="button" class="btn btn-info btn-sm">
           @if($subcat->cateGory!=null)        {{App\Models\Subcategory::getCateGoryName($subcat->cateGory->category_id)}}

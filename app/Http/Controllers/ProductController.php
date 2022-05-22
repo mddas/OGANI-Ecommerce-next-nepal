@@ -21,7 +21,16 @@ class ProductController extends Controller
         'category' => 'required',
         'subcategory' => 'required',
             ]);
-        
+
+        if($req->file('image')){
+                $file= $req->file('image');
+                $fileName= date('YmdHi').$file->getClientOriginalName();
+                $file-> move(public_path('product'), $fileName);
+                $data['image']= $fileName;
+            }
+            else{
+                $fileName="null";
+            }
         $productAdd = Product::updateOrCreate(
             ['id' => $req['id']],
             [
@@ -30,17 +39,18 @@ class ProductController extends Controller
             'category_id'=>$req['category'],
             'subcategory_id'=>$req['subcategory'],                 
             'description'=>$req['description'],
+            'image'=>$fileName,
             'show'=>$req['show'],
         ]);
         if($productAdd){
             Session::flash('insertMessage', 'Inserted successfully!');
-            return redirect("product");
+            return redirect("products");
         }
     }
 
     public function destroy(Request $req){
         $ProductObj = Product::find($req['id']);
         $ProductObj->delete();
-        return redirect('product');
+        return redirect('products');
     }
 }

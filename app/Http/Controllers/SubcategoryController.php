@@ -33,7 +33,7 @@ class SubcategoryController extends Controller
             if($req->file('image')){
                 $file= $req->file('image');
                 $fileName= date('YmdHi').$file->getClientOriginalName();
-                $file-> move(public_path('categoryimage'), $fileName);
+                $file-> move(public_path('subcategoryimage'), $fileName);
                 $data['image']= $fileName;
             }
             else{

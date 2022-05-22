@@ -16,6 +16,7 @@ class Product extends Model
     'subcategory_id',
     'description',
     'show',
+    'image',
 
 ];
 

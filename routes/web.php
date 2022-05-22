@@ -10,6 +10,10 @@ use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Subcategory;
             
 /*
 |--------------------------------------------------------------------------
@@ -63,8 +67,8 @@ Route::get('subcategoryedit',[SubcategoryController::class,'eDit']);
 Route::get('search',[SearchController::class,'index']);
 
 //product
-Route::get('product' ,[ProductController::class , 'index']);
-Route::get('productadd' ,[ProductController::class, 'insert']);
+Route::get('products' ,[ProductController::class , 'index']);
+Route::post('productadd' ,[ProductController::class, 'insert']);
 Route::get('productdelete', [ProductController::class , 'destroy']);
 
 //cart
@@ -75,7 +79,7 @@ Route::get('cartdelete' ,[CartController::class , 'destroy']);
 //index
 //Route::get('',[CustomerController::class,'index']);
 Route::get('',function(){
-    return view("home.body");
+    return view("home.body")->with(['products'=>Product::all(),'categories'=>Category::all(),'subcategories'=>Subcategory::all()]);
 });
 
 require __DIR__.'/auth.php';
