@@ -40,7 +40,7 @@
           {{$subcat->cateGory->category_id}}
           @endif" data-img="{{$subcat['image']}}">Edit</button></a>
   
-        <a href="#"><button type="button" class="btn btn-danger" onclick='deLete({{ $subcat["id"]}},"/deletesubcategory")'>Delete</button></a>
+        <a href="/deletesubcategory/?id={{ $subcat['id']}}"><button type="button" class="btn btn-danger" onclick='deLetemd({{ $subcat["id"]}},"/deletesubcategory")'>Delete</button></a>
       </td>
     </tr>
     @endforeach

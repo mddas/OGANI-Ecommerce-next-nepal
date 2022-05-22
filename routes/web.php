@@ -22,7 +22,7 @@ use App\Http\Controllers\CartController;
 |
 */
 
-Route::get('/', function () {
+Route::get('login', function () {
     return view('welcome');
 });
 
@@ -71,5 +71,11 @@ Route::get('productdelete', [ProductController::class , 'destroy']);
 Route::get('cart',[CartController::class, 'index']);
 Route::get('cartdelete' ,[CartController::class , 'destroy']);
 
+//front-end
+//index
+//Route::get('',[CustomerController::class,'index']);
+Route::get('',function(){
+    return view("home.body");
+});
 
 require __DIR__.'/auth.php';

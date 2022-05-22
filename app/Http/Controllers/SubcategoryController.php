@@ -35,12 +35,15 @@ class SubcategoryController extends Controller
                 $fileName= date('YmdHi').$file->getClientOriginalName();
                 $file-> move(public_path('categoryimage'), $fileName);
                 $data['image']= $fileName;
+            }
+            else{
+                $fileName="null";
+            }
 
-                $Subcategory = new Subcategory;
-                $Subcategory->name = $subCategoryName;
-                $Subcategory->image=$fileName;
-                $Subcategory->save();
-             }
+            $Subcategory = new Subcategory;
+            $Subcategory->name = $subCategoryName;
+            $Subcategory->image=$fileName;
+            $Subcategory->save();
             //insert category id and subcategory to the table Categoryhassubcategory.
             $categoryHasSub=new Categoryhassubcategory;
             $categoryHasSub->category_id=$categoryID;
@@ -72,6 +75,9 @@ class SubcategoryController extends Controller
     public function deleteSubcategory(Request $req){
              $SubCategory = Subcategory::find($req['id']);
              $SubCategory->delete();
+             //delete from categoryhassubcategories table
+             $categoryhassubcategories = Categoryhassubcategory::where("subcategory_id",$req['id'])->first();
+             $categoryhassubcategories->delete();
              return redirect('subcategory');
     }
 }
