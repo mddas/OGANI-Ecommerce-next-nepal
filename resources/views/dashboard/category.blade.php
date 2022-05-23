@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('home_content')
-   <div class="home_content">
+   <div class="home_content" style="overflow: scroll;">
        <div class="left" id="text"><font color="green"><h2>CATEGORY</h2></font></div>
        <div class="left" id="add"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat" data-update="0"><img src="images/Add.png" height="80px" width="80px"></button></div>
     <div class="show">     

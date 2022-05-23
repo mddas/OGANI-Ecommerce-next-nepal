@@ -38,7 +38,7 @@
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <li><a href="/shoaping-cart"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
             </ul>
             <div class="header__cart__price">item: <span>$150.00</span></div>
         </div>
@@ -130,7 +130,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                        <a href="/"><img src="img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -155,9 +155,9 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="/shoaping-cart"><i class="fa fa-shopping-bag"></i> <span id="numberOfCart">{{App\Http\Controllers\CartController::getTotalproductInCart(Auth::user()->id)}}</span></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <div class="header__cart__price">item: <span>Rs.{{App\Http\Controllers\CartController::getTotalPriceOfUser()}}</span></div>
                     </div>
                 </div>
             </div>
@@ -189,6 +189,13 @@
 @yield('blog')
 <!------end blog--------->
 
+<!----shoap-detail---->
+@yield('shoap-details')
+<!------->
+
+<!----shoaping-cart---->
+@yield('shoping-cart')
+<!--------------------->
 
  <!-- Footer Section Begin -->
     <footer class="footer spad">
@@ -268,5 +275,55 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function deLete(id,routeUrl){
+Swal.fire({
+  title: 'Do you want to deLete?',
+  showCancelButton: true,
+  confirmButtonText: 'Yes',
+}).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
+        $.ajax({
+               type:'GET',
+               url:routeUrl,
+               //data:{'_tosken' : <php echo csrf_token() ?>, 'id':id},
+               data:{'id':id},
+               success:function(data) {
+                  //$("#msg").html(data.msg);
+                  $('#'+id).remove();
+                  Swal.fire('deleted Sucess!!', '', 'success')
+               }
+            });    
+  } 
+})
+}
+function addToCart(id,routeUrl){
+    Swal.fire({
+  title: 'Do you want to Add to Cart?',
+  showCancelButton: true,
+  confirmButtonText: 'Yes',
+}).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
+        $.ajax({
+               type:'GET',
+               url:routeUrl,
+               //data:{'_token' : <php echo csrf_token() ?>, 'id':id},
+               data:{'product_id':id},
+               success:function(data) {   
+                  var count=parseInt($("#numberOfCart").text());             
+                  $("#numberOfCart").html(count+1);
+                  //$('#'+id).remove();
+                  Swal.fire('Added Sucess!!', '', 'success')
+               }
+            });    
+  } 
+})
+}
+</script>
 </body>
 </html>

@@ -26,11 +26,12 @@
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                <!--insertcart?product_id=$product['id']--->
+                                <li><a href="#"><i class="fa fa-shopping-cart" onclick="addToCart({{$product->id}},'/insertcart')"></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="#">{{$product['name']}}</a></h6>
+                            <h6><a href="/shoapdetail?id={{$product['id']}}">{{$product['name']}}</a></h6>
                             <h5>Rs.{{$product['price']}}</h5>
                         </div>
                     </div>

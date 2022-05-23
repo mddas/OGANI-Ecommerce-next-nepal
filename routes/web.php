@@ -10,6 +10,7 @@ use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ShoapdetailController;
 
 use App\Models\Product;
 use App\Models\Category;
@@ -73,13 +74,18 @@ Route::get('productdelete', [ProductController::class , 'destroy']);
 
 //cart
 Route::get('cart',[CartController::class, 'index']);
+Route::get('insertcart',[CartController::class,'insert']);
 Route::get('cartdelete' ,[CartController::class , 'destroy']);
+Route::get('shoaping-cart' , [CartController::class,'showCart']);
 
 //front-end
 //index
 //Route::get('',[CustomerController::class,'index']);
 Route::get('',function(){
     return view("home.body")->with(['products'=>Product::all(),'categories'=>Category::all(),'subcategories'=>Subcategory::all()]);
-});
+})->middleware('auth');
+
+//shoapdetail
+Route::get('shoapdetail',[ShoapdetailController::class,'index']);
 
 require __DIR__.'/auth.php';
