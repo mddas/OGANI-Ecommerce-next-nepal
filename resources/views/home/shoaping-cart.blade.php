@@ -29,7 +29,7 @@
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input type="text" value="1">
+                                                <input type="text" value="{{$cart->quantity}}">
                                             </div>
                                         </div>
                                     </td>

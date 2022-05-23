@@ -301,7 +301,13 @@ Swal.fire({
   } 
 })
 }
-function addToCart(id,routeUrl){
+function addToCart(id,routeUrl,update){
+    if($("#quantity").val()>=0){
+        var quantity=$("#quantity").val();
+    }
+    else{
+        var quantity=1;
+    }
     Swal.fire({
   title: 'Do you want to Add to Cart?',
   showCancelButton: true,
@@ -313,7 +319,7 @@ function addToCart(id,routeUrl){
                type:'GET',
                url:routeUrl,
                //data:{'_token' : <php echo csrf_token() ?>, 'id':id},
-               data:{'product_id':id},
+               data:{'product_id':id,'quantity':quantity,'update':update},
                success:function(data) {   
                   var count=parseInt($("#numberOfCart").text());             
                   $("#numberOfCart").html(count+1);

@@ -20,5 +20,6 @@ protected $fillable = [
     'user_id',
     'product_id',
     'id',
+    'quantity',
 ];
 }

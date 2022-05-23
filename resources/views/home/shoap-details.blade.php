@@ -40,12 +40,13 @@
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <input type="text" value="1">
+                                    <input id="quantity" type="text" value="{{App\Http\Controllers\CartController::getTotalQuantityOfProduct($product['id'])}}">
                                 </div>
                             </div>
                         </div>
                         @csrf
-                        <a href="/insertcart?product_id={{$product['id']}}" class="primary-btn">ADD TO CARD</a>
+                        <!----/insertcart?product_id=$product['id']---->
+                        <a href="#" class="primary-btn" onclick="addToCart({{$product['id']}},'/insertcart','append')">ADD TO CARD</a>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         <ul>
                             <li><b>Availability</b> <span>In Stock</span></li>
