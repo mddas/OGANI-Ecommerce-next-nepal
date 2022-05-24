@@ -34,7 +34,7 @@
                                         </div>
                                     </td>
                                     <td class="shoping__cart__total">
-                                        $110.00
+                                        Rs.{{$cart->product->price}}
                                     </td>
                                     <td class="shoping__cart__item__close">
                                         <span class="icon_close" onclick='deLete({{$cart->id}},"/cartdelete")'></span>
@@ -69,10 +69,10 @@
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Subtotal <span>$454.98</span></li>
-                            <li>Total <span>$454.98</span></li>
+                            <li>Shipping Fee <span>Rs.0</span></li>
+                            <li>Total <span>Rs.{{App\Http\Controllers\CartController::getTotalPriceOfUser()}}</span></li>
                         </ul>
-                        <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <a href="/checkout" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
             </div>

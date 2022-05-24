@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\User;
-use App\Models\Product;
+use App\Mocartsdels\Product;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
@@ -65,6 +64,12 @@ class CartController extends Controller
         return $price;
     }
     public static function getTotalQuantityOfProduct($product_id){
-        return Cart::where('product_id',$product_id)->first()->quantity;
+        
+        if(Cart::where('product_id',$product_id)->first()!=null){
+                return Cart::where('product_id',$product_id)->first()->quantity;
+            }
+        else{
+            return 0;
+        }
     }
 }

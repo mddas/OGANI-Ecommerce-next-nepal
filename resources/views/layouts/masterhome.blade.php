@@ -197,6 +197,9 @@
 @yield('shoping-cart')
 <!--------------------->
 
+<!---checkout---------->
+@yield('checkout')
+<!---------------------->
  <!-- Footer Section Begin -->
     <footer class="footer spad">
         <div class="container">

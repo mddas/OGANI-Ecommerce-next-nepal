@@ -11,6 +11,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShoapdetailController;
+use App\Http\Controllers\CheckoutController;
 
 use App\Models\Product;
 use App\Models\Category;
@@ -87,5 +88,9 @@ Route::get('',function(){
 
 //shoapdetail
 Route::get('shoapdetail',[ShoapdetailController::class,'index']);
+
+//checkout
+Route::get('checkout' , [CheckoutController::class , 'index']);
+Route::get('billingaddress', [CheckoutController::class , 'insert']);
 
 require __DIR__.'/auth.php';
