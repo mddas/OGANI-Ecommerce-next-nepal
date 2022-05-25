@@ -8,7 +8,7 @@
                     <!---category--->
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="/categoryimage/{{$category['image']}}">
-                            <h5><a href="/searchproduct?name={{$category['name']}}">{{$category['name']}}</a></h5>
+                            <h5><a href="/searchproduct?name={{$category['name']}}#bottom_product">{{$category['name']}}</a></h5>
                         </div>
                     </div>
                     <!----end category----->

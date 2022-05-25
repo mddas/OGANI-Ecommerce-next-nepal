@@ -10,7 +10,7 @@
                         <ul>
                             <li class="active" data-filter="*"><a href="/">All</a></li>
                             @foreach($subcategories as $subcategory)
-                            <li data-filter=".oranges"><a href="/searchproduct?name={{$subcategory['name']}}">{{$subcategory['name']}}</li></a>
+                            <li data-filter=".oranges"><a name="bottom_product" href="/searchproduct?name={{$subcategory['name']}}#bottom_product">{{$subcategory['name']}}</li></a>
                             @endforeach
                         </ul>
                     </div>

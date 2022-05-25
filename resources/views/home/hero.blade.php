@@ -10,7 +10,7 @@
                         </div>
                         <ul>
                             @foreach($categories as $category)
-                            <li><a href="/searchproduct?name={{$category['name']}}">{{$category['name']}}</a></li>
+                            <li><a href="/searchproduct?name={{$category['name']}}#bottom_product">{{$category['name']}}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -18,7 +18,7 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="/searchproduct" method="get">
+                            <form action="/searchproduct#bottom_product" method="get">
                                 <div class="hero__search__categories">
                                     All Categories
                                     <span class="arrow_carrot-down"></span>
