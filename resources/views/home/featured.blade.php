@@ -8,9 +8,9 @@
                     </div>
                     <div class="featured__controls">
                         <ul>
-                            <li class="active" data-filter="*">All</li>
+                            <li class="active" data-filter="*"><a href="/">All</a></li>
                             @foreach($subcategories as $subcategory)
-                            <li data-filter=".oranges">{{$subcategory['name']}}</li>
+                            <li data-filter=".oranges"><a href="/searchproduct?name={{$subcategory['name']}}">{{$subcategory['name']}}</li></a>
                             @endforeach
                         </ul>
                     </div>

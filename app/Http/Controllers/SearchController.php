@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Category;
+use App\Models\Product;
+use App\Models\Subcategory;
 
 use Illuminate\Http\Request;
 
@@ -49,5 +51,27 @@ class SearchController extends Controller
     }
     dd($final);
   }
-}
 
+  public function searchProduct(Request $req){
+        
+        $searchString=$req['name'];
+        
+        
+
+        $result =Product::select("products.*"
+                                 )
+                        ->join("categories", "products.category_id", "=", "categories.id")
+                        ->join("subcategories","subcategories.id","=","products.subcategory_id")
+                        ->where("products.name",'LIKE',"%".$searchString."%")
+                        ->orWhere("categories.name",'LIKE',"%".$searchString."%")
+                        ->orWhere("subcategories.name",'LIKE',"%".$searchString."%")
+                        ->get();
+        return view('home.body')->with(['products'=>$result,'categories'=>Category::all(),'subcategories'=>Subcategory::all()]);
+     }
+}
+/*
+SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+FROM Orders
+INNER JOIN Customers
+ON Orders.CustomerID=Customers.CustomerID where Customers.CustomerName="QUICK-Stop";
+*/ 

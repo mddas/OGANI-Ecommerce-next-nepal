@@ -66,7 +66,8 @@ Route::get('deletesubcategory',[SubcategoryController::class,'deleteSubcategory'
 Route::get('subcategoryedit',[SubcategoryController::class,'eDit']);
 
 //Search by Date
-Route::get('search',[SearchController::class,'index']);
+Route::get('searcharray',[SearchController::class,'index']);//Array
+Route::get('searchproduct',[SearchController::class,'searchProduct']);//search by Product
 
 //product
 Route::get('products' ,[ProductController::class , 'index']);
