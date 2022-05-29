@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShoapdetailController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\IndexController;
 
 use App\Models\Product;
 use App\Models\Category;
@@ -82,10 +83,8 @@ Route::get('shoaping-cart' , [CartController::class,'showCart']);
 
 //front-end
 //index
-//Route::get('',[CustomerController::class,'index']);
-Route::get('',function(){
-    return view("home.body")->with(['products'=>Product::all(),'categories'=>Category::all(),'subcategories'=>Subcategory::all()]);
-})->middleware('auth');
+Route::get('',[IndexController::class,'index'])->middleware('auth');
+Route::get('usingajax',[IndexController::class,'ajaxData'])->middleware('auth');
 
 //shoapdetail
 Route::get('shoapdetail',[ShoapdetailController::class,'index']);

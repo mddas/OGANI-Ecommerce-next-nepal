@@ -55,23 +55,31 @@ class SearchController extends Controller
   public function searchProduct(Request $req){
         
         $searchString=$req['name'];
-        
-        
 
-        $result =Product::select("products.*"
+        //$result = Product::with('getCategory')->with('getSubcategory')->where("products.name",'LIKE',"%".$searchString."%")->get();
+
+        $result =Product::select("products.*")
+                        ->join("categories", "products.category_id", "=", "categories.id")
+                        ->join("subcategories","subcategories.id","=","products.subcategory_id")
+                        ->where("products.name",'LIKE',"%".$searchString."%")
+                         ->orWhere("categories.name",'LIKE',"%".$searchString."%")
+                         ->orWhere("subcategories.name",'LIKE',"%".$searchString."%")
+                        ->get();
+        
+        //dd($result);
+
+        return view('home.searched_grid')->with(['products'=>$result,'categories'=>Category::all(),'subcategories'=>Subcategory::all()]);
+     }
+}
+
+/*$result =Product::select("products.name as Productname","categories.name as categoryName","subcategories.name as subcategoryName"
                                  )
                         ->join("categories", "products.category_id", "=", "categories.id")
                         ->join("subcategories","subcategories.id","=","products.subcategory_id")
                         ->where("products.name",'LIKE',"%".$searchString."%")
-                        ->orWhere("categories.name",'LIKE',"%".$searchString."%")
-                        ->orWhere("subcategories.name",'LIKE',"%".$searchString."%")
-                        ->get();
-        return view('home.body')->with(['products'=>$result,'categories'=>Category::all(),'subcategories'=>Subcategory::all()]);
-     }
-}
-/*
-SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
-FROM Orders
-INNER JOIN Customers
-ON Orders.CustomerID=Customers.CustomerID where Customers.CustomerName="QUICK-Stop";
-*/ 
+                         ->orWhere("categories.name",'LIKE',"%".$searchString."%")
+                         ->orWhere("subcategories.name",'LIKE',"%".$searchString."%")
+                        ->get()->toArray();
+$result = Product::with('getCategory')->with('getSubcategory')->where("products.name",'LIKE',"%".$searchString."%")->get();
+
+                        */

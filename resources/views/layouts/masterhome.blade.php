@@ -21,13 +21,17 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <style>
+        .product{padding-top: 1px;}
+    </style>
 </head>
 
 <body>
-    <!-- Page Preloder -->
+    <!-- Page Preloder---> 
     <div id="preloder">
         <div class="loader"></div>
     </div>
+
 
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
@@ -200,6 +204,10 @@
 <!---checkout---------->
 @yield('checkout')
 <!---------------------->
+
+<!---searched_grid------>
+@yield('searched_grid')
+<!---end searched grid-->
  <!-- Footer Section Begin -->
     <footer class="footer spad">
         <div class="container">
@@ -334,5 +342,65 @@ function addToCart(id,routeUrl,update){
 })
 }
 </script>
+<!----sort by price---->
+<script>
+function sortByprice(value) {
+    if(value == "0"){
+        var ascending = true;
+    }
+    if(value == "1"){
+        var ascending = false;
+    }
+    var sorted = $('.sortprice_products').sort(function(a,b){
+        return (ascending ==
+               (convertToNumber($(a).find('.price').html()) < 
+                convertToNumber($(b).find('.price').html()))) ? 1 : -1;
+    });
+    ascending = ascending ? false : true;
+
+    $('#sortprice').html(sorted);
+}
+
+function convertToNumber(value){
+    //alert(value)
+    return parseFloat(value.replace('$',''));
+}
+
+$(document).ready(function () {
+    $('#productajax').html('');
+  $.ajax({
+        type:"GET",
+        url:"/usingajax",
+        dataType:"json",
+        success: function(response){
+            //console.log(response.products)
+            $.each(response.products,function(key,product){
+                console.log(product['get_subcategory']['name'])
+                $('#productajax').append('<!---prorducts------>\
+                <div class="col-lg-3 col-md-4 col-sm-6 mix '+product['get_subcategory']['name']+'">\
+                    <div class="featured__item">\
+                        <div class="featured__item__pic set-bg" data-setbg="/product/'+product["image"]+'">\
+                        <img src="/product/'+product["image"]+'">\
+                            <ul class="featured__item__pic__hover">\
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>\
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>\
+                                <!--insertcart?product_id=$product["id"]--->\
+                                <li><a href="#"><i class="fa fa-shopping-cart" onclick="addToCart(product->id,"/insertcart","add")"></i></a></li>\
+                            </ul>\
+                        </div>\
+                        <div class="featured__item__text">\
+                            <h6><a href="/shoapdetail?id=$product["id"]}}">'+product["name"]+'</a></h6>\
+                            <h5>Rs.'+product["price"]+'</h5>\
+                        </div>\
+                    </div>\
+                </div>\
+                <!----end products----->');
+            });
+        }
+
+  });
+});
+</script>
+<!---end sort by price--->
 </body>
 </html>
