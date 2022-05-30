@@ -18,15 +18,20 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="/searchproduct#bottom_product" method="get">
+                            <form action="/searchproduct#bottom_product" method="get" autocomplete="off" >
                                 <div class="hero__search__categories">
                                     All Categories
                                     <span class="arrow_carrot-down"></span>
                                 </div>
-                                <input type="text" placeholder="What do you need?" name="name">
+                                <input id="autocompleteInput" type="text" placeholder="What do you need?" name="name">
                                 <button type="submit" class="site-btn">SEARCH</button>
                             </form>
                         </div>
+                        <!----this is autocomplete search---->
+                         <ul id="autocomplete" class="list-group" style="position:absolute;margin-left: 195px;margin-top: 50px; width: 300px;">
+                             
+                        </ul>
+                        <!------>
                         <div class="hero__search__phone">
                             <div class="hero__search__phone__icon">
                                 <i class="fa fa-phone"></i>

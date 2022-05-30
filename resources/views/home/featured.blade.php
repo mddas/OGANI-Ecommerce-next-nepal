@@ -18,6 +18,24 @@
             </div>
             <div id="productajax" class="row featured__filter">
                 <!-------products list--->
+                @foreach($products as $product)
+                <div class="col-lg-3 col-md-4 col-sm-6 mix {{$product['getSubcategory']['name']}}">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="/product/{{$product['image']}}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                               
+                                <li><a href="#"><i class="fa fa-shopping-cart" onclick="addToCart({{$product->id}},'/insertcart','add')"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="/shoapdetail?id={{$product['id']}}">{{$product['name']}}</a></h6>
+                            <h5>Rs.{{$product['price']}}</h5>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
             </div>
         </div>
     </section>

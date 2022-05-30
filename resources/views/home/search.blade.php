@@ -28,15 +28,20 @@
                     <div class="hero__search">
                         <div class="hero__search__form">
                             @csrf
-                            <form action="/searchproduct#bottom_product" method="get">
+                            <form action="/searchproduct#bottom_product" method="get" autocomplete="off">
                                 <div class="hero__search__categories">
                                     All Categories
                                     <span class="arrow_carrot-down"></span>
                                 </div>
-                                <input type="text" placeholder="What do yo u need?" name="name">
+                                <input id="autocompleteInput" type="text" placeholder="What do yo u need?" name="name">
                                 <button type="submit" class="site-btn">SEARCH</button>
                             </form>
                         </div>
+                        <!----this is autocomplete search---->
+                         <ul id="autocomplete" class="list-group" style="position:absolute;margin-left: 195px;margin-top: 50px; width: 300px; z-index: 9999;">
+                             
+                        </ul>
+                        <!------>
                         <div class="hero__search__phone">
                             <div class="hero__search__phone__icon">
                                 <i class="fa fa-phone"></i>

@@ -57,7 +57,7 @@
                 </ul>
             </div>
             <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
+                <a href="/login"><i class="fa fa-user"></i> Login</a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -123,7 +123,7 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                                <a href="/login"><i class="fa fa-user"></i> Login</a>
                             </div>
                         </div>
                     </div>
@@ -366,6 +366,7 @@ function convertToNumber(value){
     return parseFloat(value.replace('$',''));
 }
 
+/*
 $(document).ready(function () {
     $('#productajax').html('');
   $.ajax({
@@ -384,12 +385,12 @@ $(document).ready(function () {
                             <ul class="featured__item__pic__hover">\
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>\
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>\
-                                <!--insertcart?product_id=$product["id"]--->\
+                                <!--insertcart?product_id=product["id"]--->\
                                 <li><a href="#"><i class="fa fa-shopping-cart" onclick="addToCart(product->id,"/insertcart","add")"></i></a></li>\
                             </ul>\
                         </div>\
                         <div class="featured__item__text">\
-                            <h6><a href="/shoapdetail?id=$product["id"]}}">'+product["name"]+'</a></h6>\
+                            <h6><a href="/shoapdetail?id='+product["id"]+'">'+product["name"]+'</a></h6>\
                             <h5>Rs.'+product["price"]+'</h5>\
                         </div>\
                     </div>\
@@ -400,6 +401,25 @@ $(document).ready(function () {
 
   });
 });
+*/
+$( "#autocompleteInput" ).keyup(function(event) {
+    $('#autocomplete').html("");
+    $.ajax({
+        type:"GET",
+        url:"/searchproduct",
+        data:{'name':this.value,'ajax':"true"},
+        success: function(datas) {
+            $('#autocomplete').append(datas)
+            //console.log(datas);
+            //content.html(response);
+        }
+    });
+});
+
+function searchSet(setWord){
+    $("#autocompleteInput").val(setWord);
+}
+
 </script>
 <!---end sort by price--->
 </body>

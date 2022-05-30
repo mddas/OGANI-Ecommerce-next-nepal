@@ -68,7 +68,7 @@ Route::get('subcategoryedit',[SubcategoryController::class,'eDit']);
 
 //Search by Date
 Route::get('searcharray',[SearchController::class,'index']);//Array
-Route::get('searchproduct',[SearchController::class,'searchProduct']);//search by Product
+Route::get('searchproduct',[SearchController::class,'searchProduct']);//search by Product OR AJAX
 
 //product
 Route::get('products' ,[ProductController::class , 'index']);
