@@ -122,9 +122,19 @@
                                     <li><a href="#">English</a></li>
                                 </ul>
                             </div>
-                            <div class="header__top__right__auth">
-                                <a href="/login"><i class="fa fa-user"></i> Login</a>
+                            <div class="header__top__right__language">
+                                <div class="fa fa-user"></div>
+                                @if(Illuminate\Support\Facades\Auth::check()==1)
+                                <div>{{ Auth::user()->name }}</div>
+                                <span class="arrow_carrot-down"></span>
+                                <ul>
+                                    <li><a href="/logout">Logout</a></li>
+                                </ul>
+                                @else
+                                <div><a href="/login">Login</a></div>
+                                @endif
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -159,9 +169,14 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="/shoaping-cart"><i class="fa fa-shopping-bag"></i> <span id="numberOfCart">{{App\Http\Controllers\CartController::getTotalproductInCart(Auth::user()->id)}}</span></a></li>
+                            <li><a href="/shoaping-cart"><i class="fa fa-shopping-bag"></i> <span id="numberOfCart">
+                                {{App\Http\Controllers\CartController::getTotalproductInCart()}}
+                            </span></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>Rs.{{App\Http\Controllers\CartController::getTotalPriceOfUser()}}</span></div>
+                        <div class="header__cart__price">item: <span>Rs.
+                        
+                        {{App\Http\Controllers\CartController::getTotalPriceOfUser()}}
+                    </span></div>
                     </div>
                 </div>
             </div>

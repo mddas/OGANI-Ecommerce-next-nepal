@@ -13,6 +13,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShoapdetailController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 use App\Models\Product;
 use App\Models\Category;
@@ -29,11 +30,12 @@ use App\Models\Subcategory;
 |
 */
 
-Route::get('login', function () {
-    return view('welcome');
-});
+// Route::get('login', function () {
+//     return view('welcome');
+// });
+Route::get('logout',[AuthenticatedSessionController::class,'destroy']);
 
-Route::get('/dashboard', function () {
+Route::get('/admin', function () {
     return view('dashboard/index');
 })->middleware(['auth'])->name('dashboard');
 
@@ -83,8 +85,8 @@ Route::get('shoaping-cart' , [CartController::class,'showCart']);
 
 //front-end
 //index
-Route::get('',[IndexController::class,'index'])->middleware('auth');
-Route::get('usingajax',[IndexController::class,'ajaxData'])->middleware('auth');
+Route::get('',[IndexController::class,'index']);//->middleware('auth');
+Route::get('usingajax',[IndexController::class,'ajaxData']);//->middleware('auth');
 
 //shoapdetail
 Route::get('shoapdetail',[ShoapdetailController::class,'index']);

@@ -17,6 +17,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if(Illuminate\Support\Facades\Auth::check()==1)
                                 @foreach($carts as $cart)
                                 <tr id="{{$cart->id}}">
                                     <td class="shoping__cart__item">
@@ -41,6 +42,37 @@
                                     </td>
                                 </tr>
                                 @endforeach
+                                @endif
+
+                                @if(Illuminate\Support\Facades\Auth::check()==0)
+                    
+                                @foreach($carts as $key=>$cart)
+                                <tr id="{{$key}}">
+                                    <td class="shoping__cart__item">
+                                        <img src="product/{{$cart['image']}}" alt="" width="150px" height="150px">
+                                        <h5>{{$cart['name']}}</h5>
+                                    </td>
+                                    <td class="shoping__cart__price">
+                                        Rs.{{$cart['price']}}
+                                    </td>
+                                    <td class="shoping__cart__quantity">
+                                        <div class="quantity">
+                                            <div class="pro-qty">
+                                                <input type="text" value="{{$cart['quantity']}}">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="shoping__cart__total">
+                                        Rs.{{$cart['price']}}
+                                    </td>
+                                    <td class="shoping__cart__item__close">
+                                        <span class="icon_close" onclick='deLete({{$key}},"/cartdelete")'></span>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                
+                                @endif
+
                             </tbody>
                         </table>
                     </div>
@@ -70,6 +102,7 @@
                         <h5>Cart Total</h5>
                         <ul>
                             <li>Shipping Fee <span>Rs.0</span></li>
+
                             <li>Total <span>Rs.{{App\Http\Controllers\CartController::getTotalPriceOfUser()}}</span></li>
                         </ul>
                         <a href="/checkout" class="primary-btn">PROCEED TO CHECKOUT</a>

@@ -69,7 +69,7 @@ class SearchController extends Controller
         //dd($result);
         if (isset($req['ajax'])) {
             foreach($result as $r){
-                echo "<a href='/searchproduct?name=".$r['name']."'><li class='list-group-item' value='".$r['name']."'>".$r['name']."</li><a>";
+                echo "<a href='/searchproduct?name=".$r['name']."'><li class='list-group-item' value='".$r['name']."'>".$r['name']."</li></a>";
             }
         }
         else{
