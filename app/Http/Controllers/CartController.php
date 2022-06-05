@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Shippingaddress;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -31,11 +32,17 @@ class CartController extends Controller
         else{
             $reqquantity=$req['quantity'];
         }
-            if(Cart::where("product_id",$req['product_id'])->first()!=null){
+            if(Auth::check()==1 && Cart::where("product_id",$req['product_id'])->first()!=null){
                  $quantity=Cart::where("product_id",$req['product_id'])->first()->quantity;
                 }
             else{
                 $quantity=0;
+            }
+            if(session()->exists('carts') && empty(session()->get('carts'))==false){//this gives quantity that are in session cart
+                $TempCart=session()->get('carts');
+                if(array_key_exists($req['product_id'], $TempCart)){
+                    $quantity=$TempCart[$req['product_id']]['quantity'];
+                }
             }
             if($req['update']=="add"){
                 $totalQuantity=$reqquantity+$quantity;
@@ -62,10 +69,10 @@ class CartController extends Controller
 
                  $carts[$req['product_id']]=array(//products1
                     'name'=>$product->name,
-                    'product_id'=>$req['id'],
+                    'product_id'=>$req['product_id'],
                     'image'=>$product->image,
                     'price'=>$product->price,
-                    'quantity'=>1,
+                    'quantity'=>$totalQuantity,
                  );
                  // in_array($product_id, $carts)
                  
@@ -81,19 +88,21 @@ class CartController extends Controller
     public function showCart(){
         //return Cart::where('user_id',Auth::user()->id)->get();
         if(Auth::check()==1){
-            $carts=Cart::where('user_id',Auth::user()->id)->get();
+            $carts=Cart::where('user_id',Auth::user()->id)->where('payment',null)->get();
             return view('home.shoaping-cart')->with(['carts'=>$carts]);
         }
         else{
             //return "session testing";
+
             $carts=session()->get('carts');
+            //dd(empty($carts));
             return view('home.shoaping-cart')->with(['carts'=>$carts]);
         }
         
     }
     public static function getTotalproductInCart(){
         if(Auth::check()==1){
-                return Cart::where("user_id",Auth::user()->id)->count();
+                return Cart::where("user_id",Auth::user()->id)->where('payment',null)->count();
         }
         else{
             if (session()->exists('carts')) {
@@ -106,7 +115,7 @@ class CartController extends Controller
     }
     public static function getTotalPriceOfUser(){
         if (Auth::check()==1) {
-            $carts=Cart::where('user_id',Auth::user()->id)->get();
+            $carts=Cart::where('user_id',Auth::user()->id)->where('payment',null)->get();
             $price=0;
             //return $carts;
             foreach($carts as $cart){
@@ -129,11 +138,38 @@ class CartController extends Controller
     }
     public static function getTotalQuantityOfProduct($product_id){
         
-        if(Cart::where('product_id',$product_id)->first()!=null){
+        if(Cart::where('product_id',$product_id)->where('payment',null)->first()!=null){
                 return Cart::where('product_id',$product_id)->first()->quantity;
             }
         else{
             return 0;
         }
+    }
+
+    public static function sessionCartDo(){
+        if(session()->exists('carts') && Auth::check()==1){
+            $cartData = session()->get('carts');
+            $user_id = Auth::user()->id;
+            foreach($cartData as $cart){
+                $quantity = $cart['quantity'];
+                $product_id = $cart['product_id'];
+                $cartAdd = Cart::updateOrCreate(
+                    ['product_id'=>$product_id],
+                    [
+                    'user_id'=>Auth::user()->id,
+                     //'product_id'=>$req['product_id'],
+                     'quantity'=>$quantity,
+                    ]);
+            }
+            //session()->forget('carts');
+            return 1;
+        }
+        else{
+            return "no session yet";
+        }
+    }
+
+    public static function isOrder(){
+        return Cart::where('user_id',Auth::user()->id)->where('payment',1)->get()->count();
     }
 }

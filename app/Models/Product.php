@@ -17,6 +17,12 @@ class Product extends Model
     'description',
     'show',
     'image',
+    'quantity',
+    'unit_price',
+    'discount_type',
+    'discount',
+    'tax_type',
+    'tax',
 
 ];
 

@@ -13,6 +13,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShoapdetailController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\UserdashboardController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 use App\Models\Product;
@@ -33,6 +34,9 @@ use App\Models\Subcategory;
 // Route::get('login', function () {
 //     return view('welcome');
 // });
+Route::get('userlogin',[UserController::class,'userLogin']);
+Route::get('userregister',[UserController::class,'userRegister']);
+
 Route::get('logout',[AuthenticatedSessionController::class,'destroy']);
 
 Route::get('/admin', function () {
@@ -66,6 +70,8 @@ Route::get('deletecategory',[CategoryController::class,'deleteCategory']);
 Route::get('subcategory',[SubcategoryController::class,'show']);
 Route::post('insertsubcategory',[SubcategoryController::class,'insert']);
 Route::get('deletesubcategory',[SubcategoryController::class,'deleteSubcategory']);
+Route::get('getsubcategory_by_category_id' ,[SubcategoryController::class , 'getsubcategory']);
+
 Route::get('subcategoryedit',[SubcategoryController::class,'eDit']);
 
 //Search by Date
@@ -74,7 +80,8 @@ Route::get('searchproduct',[SearchController::class,'searchProduct']);//search b
 
 //product
 Route::get('products' ,[ProductController::class , 'index']);
-Route::post('productadd' ,[ProductController::class, 'insert']);
+Route::get('productinsert' ,[ProductController::class, 'insert']);
+Route::get('productadd' ,[ProductController::class, 'productAdd']);
 Route::get('productdelete', [ProductController::class , 'destroy']);
 
 //cart
@@ -94,5 +101,8 @@ Route::get('shoapdetail',[ShoapdetailController::class,'index']);
 //checkout
 Route::get('checkout' , [CheckoutController::class , 'index']);
 Route::get('billingaddress', [CheckoutController::class , 'insert']);
+
+//user Dashboard
+Route::get('order',[UserdashboardController::class,'orDer']);
 
 require __DIR__.'/auth.php';

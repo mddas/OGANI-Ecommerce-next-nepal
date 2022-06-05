@@ -49,6 +49,9 @@
 		.form-group{
 			font-size: 16px;
 		}
+		.product-floatleft{
+			float: left;
+		}
 		/*
 		.dropdown_category{
 			display: none;
@@ -86,7 +89,7 @@
 			<span class="tooltip">Search</span>
 		</li>
 		<li class="yes">
-			<a href="/dashboard">
+			<a href="/admin">
 			 <i class='bx bx-grid-alt'></i>
 			 <span class="links_name">DASHBOARD</span>
 		 </a>
@@ -171,10 +174,14 @@
 		</div>
 	</div>
 </div>
-
+<!---home content---->
 <div class="contents">
 			@yield('home_content')
 </div>
+<!----home content----->
+<!----product add ------>
+@yield('product_add')
+<!----product add close---->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

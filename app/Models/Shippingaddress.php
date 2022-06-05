@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Shippingaddress extends Model
 {
+    //Shippingaddress::foreign('user_id');
+
     use HasFactory;
     protected $fillable = [
     'number',

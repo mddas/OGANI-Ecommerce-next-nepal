@@ -2,6 +2,7 @@
  <!-- Shoping Cart Section Begin -->
  @section('shoping-cart')
     <section class="shoping-cart spad">
+        @if(App\Http\Controllers\CartController::getTotalproductInCart()>0)
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -30,7 +31,7 @@
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input type="text" value="{{$cart->quantity}}">
+                                                <input type="text" value="{{$cart->quantity}}" disabled>
                                             </div>
                                         </div>
                                     </td>
@@ -44,7 +45,7 @@
                                 @endforeach
                                 @endif
 
-                                @if(Illuminate\Support\Facades\Auth::check()==0)
+                                @if(empty($carts)==false && Illuminate\Support\Facades\Auth::check()==0)
                     
                                 @foreach($carts as $key=>$cart)
                                 <tr id="{{$key}}">
@@ -58,7 +59,7 @@
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input type="text" value="{{$cart['quantity']}}">
+                                                <input type="text" value="{{$cart['quantity']}}" disabled>
                                             </div>
                                         </div>
                                     </td>
@@ -110,7 +111,11 @@
                 </div>
             </div>
         </div>
+        @else
+        <center><h2>There is no any product in cart . Please buy some product</h2></center>
+        @endif
     </section>
+    
     <!-- Shoping Cart Section End -->
 
 @endsection

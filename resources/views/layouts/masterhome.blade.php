@@ -57,12 +57,13 @@
                 </ul>
             </div>
             <div class="header__top__right__auth">
-                <a href="/login"><i class="fa fa-user"></i> Login</a>
+                <a href="/userlogin"><i class="fa fa-user"></i> Login</a>
             </div>
         </div>
+        <!---
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="./index.html">Home</a></li>
+                <li class="active"><a href="/">Home</a></li>
                 <li><a href="./shop-grid.html">Shop</a></li>
                 <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
@@ -76,6 +77,7 @@
                 <li><a href="./contact.html">Contact</a></li>
             </ul>
         </nav>
+        ---->
         <div id="mobile-menu-wrap"></div>
         <div class="header__top__right__social">
             <a href="#"><i class="fa fa-facebook"></i></a>
@@ -128,10 +130,15 @@
                                 <div>{{ Auth::user()->name }}</div>
                                 <span class="arrow_carrot-down"></span>
                                 <ul>
+                                    <!--order is user order----->
+                                    @if(App\Http\Controllers\CartController::isOrder()>0)
+                                    <li><a href="order">Your Order</a></li>
+                                    @endif
+                                    <li><a href="#">Dashboard</a></li>
                                     <li><a href="/logout">Logout</a></li>
                                 </ul>
                                 @else
-                                <div><a href="/login">Login</a></div>
+                                <div><a href="/userlogin">Login</a></div>
                                 @endif
                             </div>
 
@@ -150,18 +157,18 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="./shop-grid.html">Shop</a></li>
+                            <li class="active"><a href="/">Home</a></li>
+                            <li><a href="/">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                    <li><a href="/">Shop Details</a></li>
+                                    <li><a href="/">Shoping Cart</a></li>
+                                    <li><a href="/">Check Out</a></li>
+                                    <li><a href="/">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            <li><a href="/">Blog</a></li>
+                            <li><a href="/">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -223,6 +230,19 @@
 <!---searched_grid------>
 @yield('searched_grid')
 <!---end searched grid-->
+
+<!----user login-------->
+@yield('userlogin')
+<!----end login--------->
+
+<!----user register----->
+@yield('userregister')
+<!---------------------->
+
+<!----order------------->
+@yield('order')
+<!--------------------->
+
  <!-- Footer Section Begin -->
     <footer class="footer spad">
         <div class="container">

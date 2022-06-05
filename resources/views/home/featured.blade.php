@@ -26,7 +26,7 @@
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                
-                                <li><a href="#"><i class="fa fa-shopping-cart" onclick="addToCart({{$product->id}},'/insertcart','add')"></i></a></li>
+                                <li><a href="#?" onclick="addToCart({{$product->id}},'/insertcart','add')"><i class="fa fa-shopping-cart" onclick="addToCart({{$product->id}},'/insertcart','add')"></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">

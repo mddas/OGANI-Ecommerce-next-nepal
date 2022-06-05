@@ -14,6 +14,14 @@ class UserController extends Controller
       //return view("dashboard/user",['data'=>$data,'roledata'=>Role::all()]);
     }
 
+    function userLogin(){
+        return view('home/userlogin');
+    }
+
+    function userRegister(){
+        return view('home/userregister');
+    }
+
     function Insert(Request $req){
         $name=$req['Name']; 
         $email=$req['email'];  

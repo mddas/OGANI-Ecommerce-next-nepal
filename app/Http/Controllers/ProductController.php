@@ -13,13 +13,27 @@ class ProductController extends Controller
         return view('dashboard/product')->with(["alldata"=>Product::all()]);   
     }
 
+    public function ProductAdd(){
+        return view("dashboard/product_add");
+    }
+
     public function  insert(Request $req){
-        //dd($req['name']);
+        //dd($req);
         $validated = $req->validate([
         'name' => 'required',
-        'price'=> 'required',
         'category' => 'required',
         'subcategory' => 'required',
+        'brand'=>'required',
+        'unit_price'=>'required',
+        'price'=>'required',
+        'image'=>'required',
+        'discount_type'=>'required',
+        'discount'=>'required',
+        'tax_type'=>'required',
+        'quantity'=>'required',
+        'description'=>'required',
+        'shipping_type'=>'required',
+        'shipping_cost'=>'required',
             ]);
 
         if($req->file('image')){
@@ -35,11 +49,20 @@ class ProductController extends Controller
             ['id' => $req['id']],
             [
             'name'=>$req['name'],
-            'price'=>$req['price'],
             'category_id'=>$req['category'],
-            'subcategory_id'=>$req['subcategory'],                 
+            'subcategory_id'=>$req['subcategory'],
+            'brand'=>$req['brand'],
+            "unit_price"=>$req['unit_price'],
+            "price"=>$req['price'],
+            "image"=>$fileName,
+            "discount_type"=>$req['discount_type'],
+            "discount"=>$req['discount'],
+            "tax_type"=>$req['tax_type'],
+            "tax"=>$req['tax'],
+            "quantity"=>$req['quantity'],                 
             'description'=>$req['description'],
-            'image'=>$fileName,
+            'shipping_type'=>$req['shipping_type'],
+            'shipping_cost'=>$req['shipping_cost'],
             'show'=>$req['show'],
         ]);
         if($productAdd){
@@ -53,4 +76,6 @@ class ProductController extends Controller
         $ProductObj->delete();
         return redirect('products');
     }
+
+   
 }

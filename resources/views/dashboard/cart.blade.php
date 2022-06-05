@@ -15,7 +15,7 @@
         </ul>
     </div>
 @endif
-    @can("md")
+    @can("block")
        <div class="left" id="add"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="none" data-update="0"><img src="images/Add.png" height="80px" width="80px"></button></div>
     @endcan
     <div class="show">     

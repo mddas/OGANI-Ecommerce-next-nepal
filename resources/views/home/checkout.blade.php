@@ -7,17 +7,54 @@
     <section class="checkout spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <h6><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click here</a> to enter your code
+                <div class="col-lg-12" style="height:20px">
+                    <h6 style="padding:1px 0 12px !important; margin-top: -25px;"><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click here</a> to enter your code
                     </h6>
-                </div>
-            </div>
-            <div class="checkout__form">
-                <h4>Billing Details</h4>                
-                @if(Illuminate\Support\Facades\Session::has('message'))
-<p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Illuminate\Support\Facades\Session::get('message') }}</p>
+                    @if(Illuminate\Support\Facades\Session::has('message'))
+<h3 class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Illuminate\Support\Facades\Session::get('message') }}</h3>
 @endif
 
+                </div>
+                    @if ($errors->any())
+    <div class="left alert alert-danger" style="margin-left: 20px">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li style='float: left ; margin-left:25px'>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+            </div>
+     @if(App\Http\Controllers\CartController::getTotalproductInCart()>0)
+            <div class="checkout__form">
+                <!----grid open----->
+                <div class="container">
+                  <div class="row">
+                    <div class="col">
+                      <h4>Billing Details</h4>
+                    </div>
+                    <div class="col">
+                        @if($shippingaddress)
+                      <!----this is already added address----->
+                      
+                      <ul class="list-group list-group-flush" style="color:red">
+                            <li class="list-group-item">{{$shippingaddress['name']}}</li>
+                            <li class="list-group-item">{{$shippingaddress['city_town_village']}}</li>
+                            <li class="list-group-item">{{$shippingaddress['number']}} <a href="/billingaddress/"><button type="button" class="btn btn-success">Select</button></a></li>
+
+                      </ul>
+                     
+                      @endif
+                <!--already added address is closed---->  
+                    </div>
+                    <div class="col">
+                      <!---column third---->
+                    </div>
+                  </div>
+                </div>
+                <!----grid closed---->
+                
+                     
                 <!----form open------>
                 <form action="/billingaddress" method="get">
                     <div class="row">
@@ -99,6 +136,11 @@
                 <!------form closed---->
 
             </div>
+            @elseif(App\Http\Controllers\CartController::isOrder()>0)
+            <center><h3>Your {{App\Http\Controllers\CartController::isOrder()}} Order on the Way</h3></center>
+            @else
+            <center><h3>Your Cart is now empty or you have not bought some order.Please visit and buy some product.</h3></center>
+            @endif
         </div>
     </section>
     <!-- Checkout Section End -->

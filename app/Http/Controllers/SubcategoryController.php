@@ -80,4 +80,10 @@ class SubcategoryController extends Controller
              $categoryhassubcategories->delete();
              return redirect('subcategory');
     }
+
+    public function getsubcategory(Request $req){
+        $id = $req['id'];
+        $subCategory = Categoryhassubcategory::where("category_id",$id)->with("getSubCategory")->get();//->with("getSubCategory")->get();
+        return $subCategory;
+    }
 }

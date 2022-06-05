@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('home_content')
-   <div class="home_content">
+   <div class="home_content" style="overflow: scroll;">
        <div class="left" id="text"><font color="green"><h2>PRODUCTS</h2></font></div>
        @if(Illuminate\Support\Facades\Session::has('insertMessage'))
         <p class="left alert {{ Session::get('alert-class', 'alert-info') }}" style="margin-left: 300px">{{ Illuminate\Support\Facades\Session::get('insertMessage') }}</p>
@@ -15,7 +15,7 @@
         </ul>
     </div>
 @endif
-       <div class="left" id="add"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="none" data-update="0"><img src="images/Add.png" height="80px" width="80px"></button></div>
+       <div class="left" id="add"><a href="/productadd"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="none" data-update="0"><img src="images/Add.png" height="80px" width="80px"></button></a></div>
     <div class="show">     
       </div>
   <table class="table table-striped"><!--table table-dark table-striped--->
@@ -57,76 +57,8 @@
 </table>
 <!---------modal------------>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Register New Product</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="/productadd" method="post" enctype="multipart/form-data">
-          @csrf
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Product Title</label>
-            <input id="name" type="text" class="form-control" name="name">
-          </div>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Product Description</label>
-            <input id="description" type="text" class="form-control" id="recipient-name" name="description">
-          </div>
-         <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Price</label>
-            <input id="price" type="number" class="form-control" name="price">
-          </div>
-         
 
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Select category</label>
-            <select id="category" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="category">
-              <option value="null" selected disabled>category name</option>
-
-              @foreach(App\Models\Category::all() as $cat)
-              <option value="{{$cat['id']}}">{{$cat['name']}}</option>
-              @endforeach      
-            </select>
-          </div>
-
-
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Select Sub category</label>
-            <select id="subcategory" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="subcategory">
-              <option value="null" selected disabled>sub category name</option>
-              @foreach(App\Models\Subcategory::all() as $subcat)
-              <option value="{{$subcat['id']}}">{{$subcat['name']}}</option>    
-              @endforeach  
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">images</label>
-            <input type="file" class="form-control" id="recipient-name" name="image">
-          </div>
-
-          <!-----radio----->
-          <div class="form-check">
-               <input class="form-check-input" type="checkbox" name="show" value="1" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                 Show/hides   
-             </label>
-           </div>
-         
-         <input id="id" type="hidden" name="id" value="0">
-
-          <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
-        </form>
-      </div>
-      <!---Modal close----->
+ <!---Modal close----->
       
     </div>
   </div>
