@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     public function index(){            
-        return view("dashboard.cart")->with(["alldata"=>Cart::all()]); 
+       return "nothing";
     }
     public function destroy(Request $req){
         if(Auth::check()==1){

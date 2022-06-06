@@ -95,6 +95,16 @@
 		 </a>
 		 <span class="tooltip">DSHBOARD</span>
 	 </li>
+	 @role('user')
+	 <li class="yes">
+		 <a href="order">
+			<i class='bx bx-user'></i>
+			<span class="links_name">ORDER</span>
+		</a>
+		<span class="tooltip">ORDER</span>
+	</li>
+	@endrole
+	@role('admin')
 	 <li class="yes">
 		 <a href="user">
 			<i class='bx bx-user'></i>
@@ -142,13 +152,7 @@
  <span class="tooltip">PRODUCT</span>
 </li>
 
-<li class="yes" id="cart">
-	<a href="/cart">
-	 <i class='bx bx-cog'></i>
-	 <span class="links_name">CART</span>
- </a>
- <span class="tooltip">CART</span>
-</li>
+@endrole
 
 </ul>
 <div class="content">

@@ -2,7 +2,7 @@
 
 @section('home_content')
    <div class="home_content">
-       <div class="left" id="text"><font color="green"><h2>CARRIAGE</h2></font></div>
+       <div class="left" id="text"><font color="green"><h2>ORDER</h2></font></div>
        @if(Illuminate\Support\Facades\Session::has('insertMessage'))
         <p class="left alert {{ Session::get('alert-class', 'alert-info') }}" style="margin-left: 300px">{{ Illuminate\Support\Facades\Session::get('insertMessage') }}</p>
       @endif
@@ -27,6 +27,7 @@
       <th scope="col">Product Name</th>
       <th scope="col">Image</th>
       <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
       <th scope="col">Customer Name</th>
       <th scope="col">Action</th>
     </tr>
@@ -40,11 +41,12 @@
         <img src="images" alt="image">
       </td>
       <td>{{$data->product->price}}</td>
+      <td>{{$data->quantity}}</td>
       <td>{{$data->user->name}}</td>
       <td>
-        <a href="#"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-name="$data['name']" data-price="$data['price']" data-description="$data['description']" data-category="$data['category_id']" data-subcategory="$data['subcategory_id']" data-update="1" data-id="$data['id']">Edit</button></a>
+        
         <!----roledelete/?id=$d['id']--->
-        <a href="#"><button type="button" class="btn btn-danger" onclick='deLete("{{$data["id"]}}","/cartdelete")'>Delete</button></a>
+        <a href="#"><button type="button" class="btn btn-danger" onclick='cancel("{{$data["id"]}}","/cartdelete")'>CANCEL</button></a>
       </td>
     </tr>
     @endforeach

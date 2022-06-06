@@ -9,7 +9,7 @@ use App\Models\Product;
 class ProductController extends Controller
 {
     public function index(){
-
+        //dd(json_decode(Product::all()->first()['image']));
         return view('dashboard/product')->with(["alldata"=>Product::all()]);   
     }
 
@@ -37,10 +37,18 @@ class ProductController extends Controller
             ]);
 
         if($req->file('image')){
+                //return($req->file('image'));
                 $file= $req->file('image');
-                $fileName= date('YmdHi').$file->getClientOriginalName();
-                $file-> move(public_path('product'), $fileName);
-                $data['image']= $fileName;
+                $fileName = [];
+                foreach($file as $file){
+                    $name = date('YmdHi').$file->getClientOriginalName();
+                    $file-> move(public_path('product'), $name);
+                    //return $name;
+                    array_push($fileName,$name);
+                }
+
+                $fileName=json_encode($fileName);
+                //dd($fileName);
             }
             else{
                 $fileName="null";

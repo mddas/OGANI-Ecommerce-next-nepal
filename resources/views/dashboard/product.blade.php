@@ -43,7 +43,7 @@
         <button type="button" class="btn btn-info btn-sm">{{$data->getSubcategory->name}}</button>
       </td>
       <td>
-        <img src="/product/{{$data['image']}}" alt="image" height="70px" width="50px">
+        <img src="/product/@if(json_decode($data['image'])!=null){{json_decode($data['image'])[0]}}@endif" alt="image" height="70px" width="50px">
       </td>
       <td>
         <a href="#"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-name="{{$data['name']}}" data-price="{{$data['price']}}" data-description="{{$data['description']}}" data-category="{{$data['category_id']}}" data-subcategory="{{$data['subcategory_id']}}" data-update="1" data-id="{{$data['id']}}">Edit</button></a>

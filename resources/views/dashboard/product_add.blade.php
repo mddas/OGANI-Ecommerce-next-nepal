@@ -7,7 +7,7 @@
         </div>
 
 <div class="row">
-  <form action="productinsert" method="get" enctype="multipart/form-data">
+  <form action="productinsert" method="POST" enctype="multipart/form-data">
             @csrf
 
   <div class="col-6 product-floatleft">   
@@ -64,7 +64,7 @@
 
             <div>
                 <span>Image</span>
-                <input type="file" class="block mt-1 w-full" id="recipient-name" name="image">
+                <input type="file" class="block mt-1 w-full" id="recipient-name" name="image[]" multiple>
             </div>                 
 
             

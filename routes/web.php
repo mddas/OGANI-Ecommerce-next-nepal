@@ -13,6 +13,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShoapdetailController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserdashboardController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
@@ -80,12 +81,11 @@ Route::get('searchproduct',[SearchController::class,'searchProduct']);//search b
 
 //product
 Route::get('products' ,[ProductController::class , 'index']);
-Route::get('productinsert' ,[ProductController::class, 'insert']);
+Route::post('productinsert' ,[ProductController::class, 'insert']);
 Route::get('productadd' ,[ProductController::class, 'productAdd']);
 Route::get('productdelete', [ProductController::class , 'destroy']);
 
 //cart
-Route::get('cart',[CartController::class, 'index']);
 Route::get('insertcart',[CartController::class,'insert']);
 Route::get('cartdelete' ,[CartController::class , 'destroy']);
 Route::get('shoaping-cart' , [CartController::class,'showCart']);
@@ -103,6 +103,7 @@ Route::get('checkout' , [CheckoutController::class , 'index']);
 Route::get('billingaddress', [CheckoutController::class , 'insert']);
 
 //user Dashboard
-Route::get('order',[UserdashboardController::class,'orDer']);
+Route::get('order',[OrderController::class, 'order']);
+Route::get('track',[UserdashboardController::class,'orDer']);
 
 require __DIR__.'/auth.php';

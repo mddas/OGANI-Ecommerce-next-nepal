@@ -49,7 +49,20 @@ class CheckoutController extends Controller
         if($billingAddress){
             
             //return $cart;
-        $cart =  Cart::where('user_id', Auth::user()->id)->update(['payment'=>1]); 
+            // $cart = Cart::where('user_id',Auth::user()->id)->;
+
+
+            // //insert into Order
+            //     $order = Order::updateOrCreate(
+            //         ['id'=>$billingAddress->id],
+            //         [
+            //           'user_id'=>Auth::user()->id,
+            //           ''
+            //         ]
+            //     );
+
+            //      $cart =  Cart::where('user_id', Auth::user()->id)->delete(); 
+             $cart =  Cart::where('user_id', Auth::user()->id)->update(['payment'=>1]); 
             }
 
         Session::flash('alert-class', 'alert-success'); 

@@ -21,7 +21,7 @@
                 @foreach($products as $product)
                 <div class="col-lg-3 col-md-4 col-sm-6 mix {{$product['getSubcategory']['name']}}">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="/product/{{$product['image']}}">
+                        <div class="featured__item__pic set-bg" data-setbg="/product/@if(json_decode($product['image'])!=null){{json_decode($product['image'])[0]}}@endif">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>

@@ -22,7 +22,8 @@
                                 @foreach($carts as $cart)
                                 <tr id="{{$cart->id}}">
                                     <td class="shoping__cart__item">
-                                        <img src="product/{{$cart->product->image}}" alt="" width="150px" height="150px">
+                                        <!--json_decode($data['image'])--->
+                                        <img src="product/{{json_decode($cart->product->image)[0]}}" alt="" width="150px" height="150px">
                                         <h5>{{$cart->product->name}}</h5>
                                     </td>
                                     <td class="shoping__cart__price">
