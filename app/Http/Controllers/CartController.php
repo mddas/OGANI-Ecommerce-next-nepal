@@ -168,8 +168,4 @@ class CartController extends Controller
             return "no session yet";
         }
     }
-
-    public static function isOrder(){
-        return Cart::where('user_id',Auth::user()->id)->where('payment',1)->get()->count();
-    }
 }

@@ -36,13 +36,30 @@
                     <div class="col">
                         @if($shippingaddress)
                       <!----this is already added address----->
-                      
-                      <ul class="list-group list-group-flush" style="color:red">
-                            <li class="list-group-item">{{$shippingaddress['name']}}</li>
-                            <li class="list-group-item">{{$shippingaddress['city_town_village']}}</li>
-                            <li class="list-group-item">{{$shippingaddress['number']}} <a href="/billingaddress/"><button type="button" class="btn btn-success">Select</button></a></li>
 
-                      </ul>
+                      <ul class="list-group list-group-flush" style="color:red">
+                            <label class="active card bg-white p-3">
+                    <a href="javascript:void(0);" class="delete-address" data-src="http://sewa-digital.nextnepal.org/addresses/destroy/78"><i class="fa fa-trash fa-2x"></i></a>
+                    <input type="radio" class="radio address_id" name="address_id" data-location="7" value="78" required="" style="margin-left: 300px;">
+                     <span class="plan-details">
+                    <span class="plan-type d-block">Name: <span class="right_bold">{{$shippingaddress['name']}}</span> </span>
+                    <span class="plan-type d-block">City:<span class="right_bold">{{$shippingaddress['city_town_village']}}</span> </span>
+                    <span class="plan-type d-block">Mobile Number:
+                    <span class="right_bold">
+                   {{$shippingaddress['number']}}
+                    </span>
+                    </span>
+                    <span class="plan-type d-block">
+                    Country:
+                    <span class="right_bold">
+                    Nepal
+                    </span>
+                    </span>
+                    
+                    </span>
+                    </label>
+
+                 </ul>
                      
                       @endif
                 <!--already added address is closed---->  
@@ -107,27 +124,16 @@
                                 </ul>
                                 <div class="checkout__order__subtotal">Shipping Fee <span>Rs.0</span></div>
                                 <div class="checkout__order__total">Total <span>Rs.{{App\Http\Controllers\CartController::getTotalPriceOfUser()}}</span></div>
+                    
                                 <div class="checkout__input__checkbox">
-                                    <label for="acc-or">
-                                        Create an account?
-                                        <input type="checkbox" id="acc-or">
-                                        <span class="checkmark"></span>
-                                    </label>
+                                    <div class="checkout__input__checkbox">
+                                    <input type="radio" name="payment_type" value="COD">
+                                    <label>COD</label>
+                                    <input type="radio" name="payment_type" value="E-SEWA" style="margin-left:20px">
+                                    <label>E-SEWA</label>                                   
                                 </div>
-                                <div class="checkout__input__checkbox">
-                                    <label for="payment">
-                                        Check Payment
-                                        <input type="checkbox" id="payment">
-                                        <span class="checkmark"></span>
-                                    </label>
                                 </div>
-                                <div class="checkout__input__checkbox">
-                                    <label for="paypal">
-                                        Paypal
-                                        <input type="checkbox" id="paypal">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
+                                
                                 <button type="submit" class="site-btn">PLACE ORDER</button>
                             </div>
                         </div>
@@ -136,8 +142,8 @@
                 <!------form closed---->
 
             </div>
-            @elseif(App\Http\Controllers\CartController::isOrder()>0)
-            <center><h3>Your {{App\Http\Controllers\CartController::isOrder()}} Order on the Way</h3></center>
+            @elseif(App\Http\Controllers\OrderController::isOrder()>0)
+            <center><h3>Your {{App\Http\Controllers\OrderController::isOrder()}} Order on the Way</h3></center>
             @else
             <center><h3>Your Cart is now empty or you have not bought some order.Please visit and buy some product.</h3></center>
             @endif

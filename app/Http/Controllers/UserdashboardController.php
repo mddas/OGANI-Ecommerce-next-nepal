@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 class UserdashboardController extends Controller
 {
+    /*now not in use
     public function dashBoard(){
         return "this is UserdashboardController";
     }
@@ -24,4 +25,5 @@ class UserdashboardController extends Controller
         //return $orders[0]->getShippingAddress;
         return view("home/order")->with(["orders"=>$orders]);
     }
+    */
 }

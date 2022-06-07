@@ -23,30 +23,37 @@
   <table class="table table-striped"><!--table table-dark table-striped--->
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">Order Id</th>
       <th scope="col">Product Name</th>
-      <th scope="col">Image</th>
-      <th scope="col">Price</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">Customer Name</th>
+      <th scope="col">Total Price</th>
+      <th scope="col">Status</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
     @foreach($alldata as $data)
+    @php
+      $totalPrice = 0;
+      foreach(json_decode($data['products'],true) as $product)
+          $totalPrice=$product['get_product']['price']+$totalPrice
+    @endphp
     <tr id="{{$data['id']}}">
-      <th scope="row">{{$data['id']}}</th>
-      <td>{{$data->product->name}}</td>  
-      <td>
-        <img src="images" alt="image">
-      </td>
-      <td>{{$data->product->price}}</td>
-      <td>{{$data->quantity}}</td>
-      <td>{{$data->user->name}}</td>
+      <th scope="row">{{($data['order_id'])}}</th>
+      <td>@foreach(json_decode($data['products'],true) as $product)<button class="btn btn-success btn-sm" style="margin-left:5px">{{$product['get_product']['name']}}</button>@endforeach</td>  
+      <td>{{$totalPrice}}</td>
+      
+      <td><a href="#">
+        @if($data['payment_type']=="COD" || $data['payment_type']==null)
+        <button type="button" class="btn btn-danger" onclick='cancel("$data["id"]","/cartdelete")'>Payment Pending*</button></a></td>
+        @elseif($data['payment_type']=="E-sewa")
+        <button type="button" class="btn btn-success" onclick='cancel("$data["id"]","/cartdelete")'>Payment Success*</button></a></td>
+        @endif
+
       <td>
         
         <!----roledelete/?id=$d['id']--->
-        <a href="#"><button type="button" class="btn btn-danger" onclick='cancel("{{$data["id"]}}","/cartdelete")'>CANCEL</button></a>
+        <a href="#"><button type="button" class="btn btn-danger" onclick='cancel("$data["id"]","/cartdelete")'>VIEW</button></a>
+        <a href="#"><button type="button" class="btn btn-danger" onclick='cancel("$data["id"]","/cartdelete")'>CANCEL</button></a>
       </td>
     </tr>
     @endforeach

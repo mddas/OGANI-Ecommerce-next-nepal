@@ -131,10 +131,10 @@
                                 <span class="arrow_carrot-down"></span>
                                 <ul>
                                     <!--order is user order----->
-                                    @if(App\Http\Controllers\CartController::isOrder()>0)
+                                    @if(App\Http\Controllers\OrderController::isOrder()>0)
                                     <li><a href="order">Your Order</a></li>
                                     @endif
-                                    <li><a href="#">Dashboard</a></li>
+                                    <li><a href="#">Track</a></li>
                                     <li><a href="/logout">Logout</a></li>
                                 </ul>
                                 @else

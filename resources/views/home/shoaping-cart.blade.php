@@ -51,7 +51,7 @@
                                 @foreach($carts as $key=>$cart)
                                 <tr id="{{$key}}">
                                     <td class="shoping__cart__item">
-                                        <img src="product/{{$cart['image']}}" alt="" width="150px" height="150px">
+                                        <img src="product/{{json_decode($cart['image'])[0]}}" alt="" width="150px" height="150px">
                                         <h5>{{$cart['name']}}</h5>
                                     </td>
                                     <td class="shoping__cart__price">

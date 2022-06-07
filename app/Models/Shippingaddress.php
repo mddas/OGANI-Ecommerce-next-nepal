@@ -18,5 +18,6 @@ class Shippingaddress extends Model
     'state',
     'googleLocation',
     'name',
+    'payment_type',
    ];
 }

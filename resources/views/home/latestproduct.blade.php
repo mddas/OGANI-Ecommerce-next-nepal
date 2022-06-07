@@ -9,9 +9,9 @@
                             <!----crousal 1------>
                             <div class="latest-prdouct__slider__item">
                                 @foreach($products as $product)
-                                <a href="#" class="latest-product__item">
+                                <a href="/shoapdetail?id={{$product['id']}}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
-                                        <img src="/product/{{$product['image']}}" alt="">
+                                        <img src="/product/{{json_decode($product['image'])[0]}}" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>{{$product['name']}}</h6>
@@ -28,9 +28,9 @@
                             <div class="latest-prdouct__slider__item">
                                 <!----second crousal----->
                                 @foreach($products as $product)
-                                <a href="#" class="latest-product__item">
+                                <a href="/shoapdetail?id={{$product['id']}}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
-                                        <img src="/product/{{$product['image']}}" alt="">
+                                        <img src="/product/{{json_decode($product['image'])[0]}}" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>{{$product['name']}}</h6>
@@ -52,9 +52,9 @@
                             <div class="latest-prdouct__slider__item">
                                 <!----second crousal----->
                                 @foreach($products as $product)
-                                <a href="#" class="latest-product__item">
+                                <a href="/shoapdetail?id={{$product['id']}}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
-                                        <img src="/product/{{$product['image']}}" alt="">
+                                        <img src="/product/{{json_decode($product['image'])[0]}}" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>{{$product['name']}}</h6>
@@ -69,9 +69,9 @@
                             <div class="latest-prdouct__slider__item">
                                 <!----second crousal----->
                                 @foreach($products as $product)
-                                <a href="#" class="latest-product__item">
+                                <a href="/shoapdetail?id={{$product['id']}}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
-                                        <img src="/product/{{$product['image']}}" alt="">
+                                        <img src="/product/{{json_decode($product['image'])[0]}}" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>{{$product['name']}}</h6>
@@ -93,9 +93,9 @@
                             <div class="latest-prdouct__slider__item">
                                 <!----second crousal----->
                                 @foreach($products as $product)
-                                <a href="#" class="latest-product__item">
+                                <a href="/shoapdetail?id={{$product['id']}}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
-                                        <img src="/product/{{$product['image']}}" alt="">
+                                        <img src="/product/{{json_decode($product['image'])[0]}}" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>{{$product['name']}}</h6>
