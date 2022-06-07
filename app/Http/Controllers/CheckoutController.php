@@ -27,7 +27,7 @@ class CheckoutController extends Controller
     }
 
     public function insert(Request $req){
-         //return $req;
+         
         //dd($req['district']);
         if($req['action']!='update'){
            $validated = $req->validate([
@@ -48,11 +48,10 @@ class CheckoutController extends Controller
             'state'=>$req['state'],
             'googleLocation'=>$req['location'],
             'name'=>$req['name'],
-            'payment_type'=>$req['payment'],
         ]);
     }
     else{
-        $billingAddress = "update";
+        $billingAddress = "By Filling form";
     }
     
         if($billingAddress || $req['action']=='update'){
@@ -63,13 +62,18 @@ class CheckoutController extends Controller
 
 
             //insert into Order
+                 $payment_type = $req['payment_type'];
+                 if ($payment_type == null || $payment_type !="E-SEWA") {
+                     $payment_type = "COD";
+
+                 }
                  $order = Order::updateOrCreate(
                       //['id'=>$billingAddress->id],
                       [//20220601-17320555
                         'order_id'=>date('Ymd').'-'.rand(2000,7000),
                         'user_id'=>Auth::user()->id,
                         'products'=>$cart_products_shipping,
-                        'payment_type'=>$req['payment_type'],
+                        'payment_type'=>$payment_type,
                       ]
                      );
 

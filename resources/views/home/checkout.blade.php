@@ -36,30 +36,32 @@
                     <div class="col">
                         @if($shippingaddress)
                       <!----this is already added address----->
-
-                      <ul class="list-group list-group-flush" style="color:red">
-                            <label class="active card bg-white p-3">
-                    <a href="javascript:void(0);" class="delete-address" data-src="http://sewa-digital.nextnepal.org/addresses/destroy/78"><i class="fa fa-trash fa-2x"></i></a>
-                    <input type="radio" class="radio address_id" name="address_id" data-location="7" value="78" required="" style="margin-left: 300px;">
-                     <span class="plan-details">
-                    <span class="plan-type d-block">Name: <span class="right_bold">{{$shippingaddress['name']}}</span> </span>
-                    <span class="plan-type d-block">City:<span class="right_bold">{{$shippingaddress['city_town_village']}}</span> </span>
-                    <span class="plan-type d-block">Mobile Number:
-                    <span class="right_bold">
-                   {{$shippingaddress['number']}}
-                    </span>
-                    </span>
-                    <span class="plan-type d-block">
-                    Country:
-                    <span class="right_bold">
-                    Nepal
-                    </span>
-                    </span>
-                    
-                    </span>
-                    </label>
-
-                 </ul>
+                 <div class="card" style="width: 28rem;">
+                      <div class="card-body">
+                        <form action="/billingaddress" method="GET">
+                            @csrf
+                        <div class="row">
+                            <div class="col-2">
+                                 <i class="fa fa-trash fa-2x"></i>
+                            </div>
+                            <div class="col-10">
+                                <h5 class="card-title list-group-item-info"><center>Shipping address</center></h5>
+                            </div>
+                        </div>
+                       
+                        
+                        <ul class="list-group">
+                          <li class="list-group-item">Name:{{$shippingaddress['name']}}</li>
+                          <li class="list-group-item">shipping address:{{$shippingaddress['city_town_village']}}</li>
+                          <li class="list-group-item">Mobile Number:{{$shippingaddress['number']}}</li>
+                          <li class="list-group-item"><div class="row"><div class="col-sm"><label>COD:</label><input type="radio" name="payment_type" value="COD" checked></div><div class="col-sm"><label>E-SEWA:</label><input type="radio" name="payment_type" value="E-SEWA"></div></div></li>
+                        </ul>
+                        <center>
+                            <input type="hidden" name="action" value="update">
+                         <input class="btn btn-primary" type="submit" value="select"></center>
+                       </form>
+                      </div>
+                    </div>
                      
                       @endif
                 <!--already added address is closed---->  

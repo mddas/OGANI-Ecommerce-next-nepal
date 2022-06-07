@@ -104,6 +104,6 @@ Route::get('billingaddress', [CheckoutController::class , 'insert']);
 
 //user Dashboard
 Route::get('order',[OrderController::class, 'order']);
-Route::get('track',[UserdashboardController::class,'track']);
+Route::get('track',[OrderController::class,'track']);
 
 require __DIR__.'/auth.php';

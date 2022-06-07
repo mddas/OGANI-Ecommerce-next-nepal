@@ -19,4 +19,10 @@ class OrderController extends Controller
   public static function isOrder(){
         return Order::where('user_id',Auth::user()->id)->get()->count();
     }
+
+    public function track(Request $req){
+      $tracked=Order::where('order_id',$req['order_id'])->first();
+      //return json_decode($tracked['products'],true)[0]['get_shipping_address'];
+      return view('home.track')->with(["orders"=>$tracked]);
+    }
 }

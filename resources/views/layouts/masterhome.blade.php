@@ -134,7 +134,7 @@
                                     @if(App\Http\Controllers\OrderController::isOrder()>0)
                                     <li><a href="order">Your Order</a></li>
                                     @endif
-                                    <li><a href="#">Track</a></li>
+                                    <li><a href="/track">Track</a></li>
                                     <li><a href="/logout">Logout</a></li>
                                 </ul>
                                 @else

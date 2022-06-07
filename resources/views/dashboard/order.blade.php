@@ -45,7 +45,7 @@
       <td><a href="#">
         @if($data['payment_type']=="COD" || $data['payment_type']==null)
         <button type="button" class="btn btn-danger" onclick='cancel("$data["id"]","/cartdelete")'>Payment Pending*</button></a></td>
-        @elseif($data['payment_type']=="E-sewa")
+        @elseif($data['payment_type']=="E-SEWA")
         <button type="button" class="btn btn-success" onclick='cancel("$data["id"]","/cartdelete")'>Payment Success*</button></a></td>
         @endif
 
