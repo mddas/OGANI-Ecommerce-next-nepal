@@ -23,6 +23,7 @@ class Product extends Model
     'discount',
     'tax_type',
     'tax',
+    'shipping_cost',
 
 ];
 

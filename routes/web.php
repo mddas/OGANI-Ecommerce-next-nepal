@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -12,6 +13,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShoapdetailController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\AdminTrackerController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserdashboardController;
@@ -105,5 +107,9 @@ Route::get('billingaddress', [CheckoutController::class , 'insert']);
 //user Dashboard
 Route::get('order',[OrderController::class, 'order']);
 Route::get('track',[OrderController::class,'track']);
+
+//AdminTracker
+
+Route::get('trace_user',[AdminTrackerController::class,'index']);
 
 require __DIR__.'/auth.php';

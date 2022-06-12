@@ -7,7 +7,7 @@
 	<div class="col-sm">
 		<form class="form-inline" action="/track" method="get">
   <div class="form-group mx-sm-3 mb-2">
-    <label for="inputPassword2" class="sr-only">Password</label>
+    <label for="inputPassword2" class="sr-only">ORDER ID</label>
     <input type="text" class="form-control" id="inputPassword2" placeholder="Order ID" name="order_id">
   </div>
   <button type="submit" class="btn btn-primary mb-2">Track</button>
@@ -41,6 +41,12 @@
 </div>
 		</div>
 		<div class="card mt-4">
+			<style>
+				.strong-600{
+					font-size: 20px;
+					color: black;
+				}
+			</style>
 			<div class="card-header py-2 px-3 heading-6 strong-600 clearfix">
 				<div class="float-left">Order Summary</div>
 			</div>

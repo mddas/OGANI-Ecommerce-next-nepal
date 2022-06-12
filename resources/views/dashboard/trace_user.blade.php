@@ -1,8 +1,53 @@
 @extends('layouts.master')
 
-@section('home_content')
-   <div class="home_content">
-       <div class="left" id="text"><font color="green"><h2>ORDER</h2></font></div>
+@section('trace_user')
+   <div class="home_content" style="overflow-y: scroll;">
+       <!----<div class="left" id="text"><font color="green"><h2></h2></font></div>--->
+       <!-------search---------->
+
+
+ <!-- Hero Section Begin -->
+    <section class="hero hero-normal">
+        <div class="container">
+            <div class="row">
+              <div class="col-2">
+                
+              </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            @csrf
+                            <form autocomplete="off">
+                                <div class="hero__search__categories">
+                                    User Trace
+                                    <span class="arrow_carrot-down"></span>
+                                </div>
+                                <input id="userTrace" type="text" placeholder="What do yo u need?" name="name">
+                                <button type="submit" class="site-btn">SEARCH</button>
+                            </form>
+                        </div>
+                        <!----this is autocomplete search---->
+                         <ul id="autocomplete" class="list-group" style="position:absolute;margin-left: 195px;margin-top: 50px; width: 300px; z-index: 9999;">
+                             
+                        </ul>
+                        <!------>
+                        <div class="hero__search__phone">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>+65 11.188.888</h5>
+                                <span>support 24/7 time</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+       <!-------search---------->
        @if(Illuminate\Support\Facades\Session::has('insertMessage'))
         <p class="left alert {{ Session::get('alert-class', 'alert-info') }}" style="margin-left: 300px">{{ Illuminate\Support\Facades\Session::get('insertMessage') }}</p>
       @endif
@@ -24,13 +69,16 @@
   <thead>
     <tr>
       <th scope="col">Order Id</th>
+      <th scope="col">Customer Name</th>
+      <th scope="col">Shipping Address</th>
+      <th scope="col">Mobile Number</th>
       <th scope="col">Product Name</th>
       <th scope="col">Total Price</th>
       <th scope="col">Status</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="userTraceTable">
     @foreach($alldata as $data)
     @php
       $totalPrice = 0;
@@ -38,7 +86,11 @@
           $totalPrice=$product['get_product']['price']+$totalPrice
     @endphp
     <tr id="{{$data['id']}}">
-      <th scope="row">{{($data['order_id'])}}</th>
+      <td scope="row">{{($data['order_id'])}}</td>
+      <td scope="col">{{json_decode($data['products'],true)[0]['get_shipping_address']['name']}}</td>
+      <td scope="col">{{json_decode($data['products'],true)[0]['get_shipping_address']['city_town_village']}}</td>
+      <td scope="col">{{json_decode($data['products'],true)[0]['get_shipping_address']['number']}}</td>
+
       <td>@foreach(json_decode($data['products'],true) as $product)<button class="btn btn-success btn-sm" style="margin-left:5px">{{$product['get_product']['name']}}</button>@endforeach</td>  
       <td>{{$totalPrice}}</td>
       
@@ -53,7 +105,9 @@
         
         <!----roledelete/?id=$d['id']--->
         <a href="/track?order_id={{$data['order_id']}}"><button type="button" class="btn btn-danger">VIEW</button></a>
-        <a href="#"><button type="button" class="btn btn-danger" onclick='cancel("$data["id"]","/cartdelete")'>CANCEL</button></a>
+        <!----<a href="#"><button type="button" class="btn btn-danger" onclick='cancel("$data["id"]","/cartdelete")'>CANCEL</button></a>
+        <a href="#"><button type="button" class="btn btn-danger" onclick='cancel("$data["id"]","/cartdelete")'>DELETE</button></a>
+          ----->
       </td>
     </tr>
     @endforeach

@@ -7,6 +7,13 @@
                         <h2>Featured Product</h2>
                     </div>
                     <div class="featured__controls">
+                        <style>
+                            a:hover, a:focus {
+                                text-decoration: none;
+                                 outline: none;
+                                color: red;
+                            }
+                        </style>
                         <ul>
                             <li class="active" data-filter="*"><a href="/">All</a></li>
                             @foreach($subcategories as $subcategory)
