@@ -291,6 +291,32 @@ function update_order_status(id,routeUrl){
   } 
 })
 }
+
+function update_order_cancel(id,routeUrl,cancel){
+	payment_type = $('#status').val()
+	Swal.fire({
+  title: 'Do you want to cancel?',
+  showCancelButton: true,
+  confirmButtonText: 'Yes',
+}).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
+    	$.ajax({
+               type:'GET',
+               url:routeUrl,
+               //data:{'_token' : <php echo csrf_token() ?>, 'id':id},
+               data:{'id':id,'cancel':cancel},
+               success:function(data) {
+               	  console.log(data);
+                  //$("#msg").html(data.msg);
+                  //$('#'+id).remove();
+                  Swal.fire('cancelled Sucess!!', '', 'success')
+               }
+            });    
+  } 
+})
+}
+
 </script>
 </body>
 </html>

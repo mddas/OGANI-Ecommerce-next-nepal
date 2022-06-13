@@ -32,7 +32,11 @@ class AdminTrackerController extends Controller
 
     }
     public function cancel(Request $req){
-        return $req." :this is cancel";
+        //here 1 means cancel and 0 means not cancel
+        $orderObj =  Order::find($req['id']);
+        $orderObj = $orderObj->update(['cancel'=>$req['cancel']]);
+        return $orderObj;
+
     }
 
 }

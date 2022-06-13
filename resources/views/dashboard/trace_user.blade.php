@@ -96,7 +96,7 @@
       
       <td><a href="#">
         <form action="#" method="get">
-          <select id="status">
+          <select id="status" onchange="update_order_status({{$data['id']}},'order_status_update')">
             <option value="COD" @if($data['payment_type']=='COD') || $data['payment_type']==null) selected @endif>Unpaid*</option>
             <option value="E-SEWA" @if($data['payment_type']=='E-SEWA') selected @endif>
               Paid*
@@ -117,17 +117,21 @@
               <a class="dropdown-item" href="/track?order_id={{$data['order_id']}}">view</a>
               <a class="dropdown-item" href="#" onclick="deLete({{$data['id']}},'/order_delete')">Delete</a>
               <a class="dropdown-item" href="#" onclick="update_order_status({{$data['id']}},'order_status_update')">Update</a>
-              <a class="dropdown-item" href="/order_cancel?order_id={{$data['order_id']}}">Cancel</a>
+              @if($data['cancel']==0)
+              <a class="dropdown-item" href="#" onclick="update_order_cancel({{$data['id']}},'order_cancel',1)">Cancel</a>
+              @elseif($data['cancel']==1)
+               <a class="dropdown-item" href="#" onclick="update_order_cancel({{$data['id']}},'order_cancel',0)">uncancel</a>
+               @endif
             </div>
           </div>
-
-          <!-----dropdown action closed--->  
-
-        
-        <!----<a href="#"><button type="button" class="btn btn-danger" onclick='cancel("$data["id"]","/cartdelete")'>CANCEL</button></a>
-        <a href="#"><button type="button" class="btn btn-danger" onclick='cancel("$data["id"]","/cartdelete")'>DELETE</button></a>
-          ----->
       </td>
+      
+        @if($data['cancel']==1)
+        <td>
+          <button class="btn btn-success btn-sm" style="margin-left:5px">Cancelled</button>
+        </td>
+        @endif
+      
     </tr>
     @endforeach
       

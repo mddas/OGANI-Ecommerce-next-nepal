@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 05, 2022 at 11:39 PM
+-- Generation Time: Jun 13, 2022 at 10:05 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -36,16 +36,6 @@ CREATE TABLE `carts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `carts`
---
-
-INSERT INTO `carts` (`id`, `user_id`, `product_id`, `quantity`, `payment`, `created_at`, `updated_at`) VALUES
-(59, '1', '37', 2, 1, '2022-05-31 19:41:58', '2022-06-01 15:36:27'),
-(60, '1', '41', 1, 1, '2022-05-31 19:45:59', '2022-06-01 15:36:27'),
-(61, '1', '38', 1, NULL, '2022-06-01 17:25:11', '2022-06-01 17:25:11'),
-(62, '1', '39', 1, NULL, '2022-06-01 18:22:44', '2022-06-01 18:22:44');
 
 -- --------------------------------------------------------
 
@@ -100,7 +90,9 @@ INSERT INTO `categoryhassubcategories` (`id`, `category_id`, `subcategory_id`, `
 (14, '10', '16', '2022-05-22 14:54:15', '2022-05-22 14:54:15'),
 (15, '10', '17', '2022-05-22 14:54:58', '2022-05-22 14:54:58'),
 (16, '13', '18', '2022-05-25 15:07:32', '2022-05-25 15:07:32'),
-(17, '11', '19', '2022-06-05 03:01:14', '2022-06-05 03:01:14');
+(17, '11', '19', '2022-06-05 03:01:14', '2022-06-05 03:01:14'),
+(18, '17', '20', '2022-06-06 14:19:19', '2022-06-06 14:19:19'),
+(19, '15', '21', '2022-06-06 14:23:05', '2022-06-06 14:23:05');
 
 -- --------------------------------------------------------
 
@@ -146,7 +138,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2022_05_09_002246_create_categoryhassubcategories_table', 1),
 (10, '2022_05_19_231835_create_carts_table', 2),
 (11, '2022_05_19_232631_create_carts_table', 3),
-(12, '2022_05_24_005952_create_shippingaddresses_table', 4);
+(12, '2022_05_24_005952_create_shippingaddresses_table', 4),
+(13, '2022_06_06_085431_create_orders_table', 5);
 
 -- --------------------------------------------------------
 
@@ -184,6 +177,31 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `products` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`products`)),
+  `payment_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `cancel` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `order_id`, `user_id`, `products`, `payment_type`, `created_at`, `updated_at`, `cancel`) VALUES
+(26, '20220607-2846', '1', '[{\"id\":95,\"user_id\":\"1\",\"product_id\":\"51\",\"quantity\":3,\"payment\":null,\"created_at\":\"2022-06-07T02:22:33.000000Z\",\"updated_at\":\"2022-06-07T22:56:41.000000Z\",\"get_product\":{\"id\":51,\"name\":\"samsung mobile\",\"category_id\":\"9\",\"subcategory_id\":\"13\",\"quantity\":5,\"brand\":null,\"unit_price\":\"pieces\",\"description\":\"this is mobile\",\"image\":\"[\\\"202206061959samsung-galaxy-a33-5g.jpg\\\",\\\"202206061959samsung-galaxy-a52s-5g.jpg\\\"]\",\"price\":3000,\"discount_type\":\"flat\",\"discount\":50,\"tax_type\":\"percent\",\"tax\":60,\"shipping_type\":null,\"shipping_cost\":null,\"show\":null,\"created_at\":\"2022-06-06T19:59:30.000000Z\",\"updated_at\":\"2022-06-06T19:59:30.000000Z\"},\"get_shipping_address\":{\"id\":17,\"name\":\"Md das\",\"number\":\"9808059156\",\"email\":\"mddasgudiya@gmail.com\",\"city_town_village\":\"KTM\",\"state\":\"Bagmati\",\"googleLocation\":\"location\",\"user_id\":\"1\",\"status\":null,\"created_at\":\"2022-06-07T20:59:41.000000Z\",\"updated_at\":\"2022-06-07T20:59:41.000000Z\"}},{\"id\":100,\"user_id\":\"1\",\"product_id\":\"50\",\"quantity\":1,\"payment\":null,\"created_at\":\"2022-06-07T22:56:18.000000Z\",\"updated_at\":\"2022-06-07T22:56:18.000000Z\",\"get_product\":{\"id\":50,\"name\":\"Sari\",\"category_id\":\"10\",\"subcategory_id\":\"16\",\"quantity\":4,\"brand\":null,\"unit_price\":\"pieces\",\"description\":\"this is saaro\",\"image\":\"[\\\"202206061958saari.jpg\\\",\\\"202206061958saari2.jpeg\\\"]\",\"price\":500,\"discount_type\":\"percent\",\"discount\":10,\"tax_type\":\"percent\",\"tax\":20,\"shipping_type\":null,\"shipping_cost\":null,\"show\":null,\"created_at\":\"2022-06-06T19:58:23.000000Z\",\"updated_at\":\"2022-06-06T19:58:23.000000Z\"},\"get_shipping_address\":{\"id\":17,\"name\":\"Md das\",\"number\":\"9808059156\",\"email\":\"mddasgudiya@gmail.com\",\"city_town_village\":\"KTM\",\"state\":\"Bagmati\",\"googleLocation\":\"location\",\"user_id\":\"1\",\"status\":null,\"created_at\":\"2022-06-07T20:59:41.000000Z\",\"updated_at\":\"2022-06-07T20:59:41.000000Z\"}},{\"id\":101,\"user_id\":\"1\",\"product_id\":\"53\",\"quantity\":2,\"payment\":null,\"created_at\":\"2022-06-07T22:56:27.000000Z\",\"updated_at\":\"2022-06-07T22:57:08.000000Z\",\"get_product\":{\"id\":53,\"name\":\"berger food\",\"category_id\":\"13\",\"subcategory_id\":\"18\",\"quantity\":5,\"brand\":null,\"unit_price\":\"pieces\",\"description\":\"veg berger\",\"image\":\"[\\\"202206062002food.jpg\\\"]\",\"price\":10,\"discount_type\":\"flat\",\"discount\":80,\"tax_type\":\"percent\",\"tax\":20,\"shipping_type\":null,\"shipping_cost\":null,\"show\":null,\"created_at\":\"2022-06-06T20:02:52.000000Z\",\"updated_at\":\"2022-06-06T20:02:52.000000Z\"},\"get_shipping_address\":{\"id\":17,\"name\":\"Md das\",\"number\":\"9808059156\",\"email\":\"mddasgudiya@gmail.com\",\"city_town_village\":\"KTM\",\"state\":\"Bagmati\",\"googleLocation\":\"location\",\"user_id\":\"1\",\"status\":null,\"created_at\":\"2022-06-07T20:59:41.000000Z\",\"updated_at\":\"2022-06-07T20:59:41.000000Z\"}}]', 'E-SEWA', '2022-06-07 17:12:33', '2022-06-12 20:39:18', 1),
+(37, '20220613-3611', '1', '[{\"id\":116,\"user_id\":\"1\",\"product_id\":\"55\",\"quantity\":1,\"payment\":null,\"created_at\":\"2022-06-13T01:15:21.000000Z\",\"updated_at\":\"2022-06-13T01:15:21.000000Z\",\"get_product\":{\"id\":55,\"name\":\"saari\",\"category_id\":\"10\",\"subcategory_id\":\"16\",\"quantity\":20,\"brand\":null,\"unit_price\":\"pieces\",\"description\":\"latest saari\",\"image\":\"[\\\"202206062006saari2.jpeg\\\"]\",\"price\":1000,\"discount_type\":\"flat\",\"discount\":43,\"tax_type\":\"percent\",\"tax\":19,\"shipping_type\":null,\"shipping_cost\":0,\"show\":null,\"created_at\":\"2022-06-06T20:06:54.000000Z\",\"updated_at\":\"2022-06-06T20:06:54.000000Z\"},\"get_shipping_address\":{\"id\":21,\"name\":\"asd\",\"number\":\"1234\",\"email\":\"A@A.A\",\"city_town_village\":\"ASAd\",\"state\":\"ADS\",\"googleLocation\":\"ED\",\"user_id\":\"1\",\"status\":null,\"created_at\":\"2022-06-08T01:55:38.000000Z\",\"updated_at\":\"2022-06-08T01:55:38.000000Z\"}},{\"id\":117,\"user_id\":\"1\",\"product_id\":\"56\",\"quantity\":1,\"payment\":null,\"created_at\":\"2022-06-13T01:15:25.000000Z\",\"updated_at\":\"2022-06-13T01:15:25.000000Z\",\"get_product\":{\"id\":56,\"name\":\"green vegitable\",\"category_id\":\"15\",\"subcategory_id\":\"21\",\"quantity\":10,\"brand\":null,\"unit_price\":\"kg\",\"description\":\"vegitable\",\"image\":\"[\\\"202206062009vegitable.jpeg\\\"]\",\"price\":95,\"discount_type\":\"flat\",\"discount\":0,\"tax_type\":\"flat\",\"tax\":20,\"shipping_type\":null,\"shipping_cost\":0,\"show\":null,\"created_at\":\"2022-06-06T20:09:22.000000Z\",\"updated_at\":\"2022-06-06T20:09:22.000000Z\"},\"get_shipping_address\":{\"id\":21,\"name\":\"asd\",\"number\":\"1234\",\"email\":\"A@A.A\",\"city_town_village\":\"ASAd\",\"state\":\"ADS\",\"googleLocation\":\"ED\",\"user_id\":\"1\",\"status\":null,\"created_at\":\"2022-06-08T01:55:38.000000Z\",\"updated_at\":\"2022-06-08T01:55:38.000000Z\"}}]', 'E-SEWA', '2022-06-12 19:31:37', '2022-06-12 20:39:25', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `password_resets`
 --
 
@@ -216,7 +234,8 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 (2, 'create', 'web', NULL, NULL),
 (3, 'delete', 'web', '2022-05-18 19:27:27', '2022-05-18 19:27:27'),
 (4, 'view', 'web', '2022-05-18 19:28:08', '2022-05-18 19:28:08'),
-(5, 'role', 'web', '2022-05-18 19:29:01', '2022-05-18 19:29:01');
+(5, 'role', 'web', '2022-05-18 19:29:01', '2022-05-18 19:29:01'),
+(6, 'user', 'web', '2022-06-06 03:40:43', '2022-06-06 03:40:43');
 
 -- --------------------------------------------------------
 
@@ -251,13 +270,13 @@ CREATE TABLE `products` (
   `brand` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `unit_price` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`image`)),
   `price` int(10) NOT NULL,
   `discount_type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `discount` int(11) NOT NULL,
   `tax_type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tax` int(10) DEFAULT NULL,
-  `shipping_type` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shipping_type` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT '0',
   `shipping_cost` int(10) DEFAULT NULL,
   `show` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -269,13 +288,16 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `category_id`, `subcategory_id`, `quantity`, `brand`, `unit_price`, `description`, `image`, `price`, `discount_type`, `discount`, `tax_type`, `tax`, `shipping_type`, `shipping_cost`, `show`, `created_at`, `updated_at`) VALUES
-(36, 'I phone', '9', '13', 0, NULL, '', 'Apple brand', '202205222041apple-iphone-7-red.jpg', 95000, '', 0, '', NULL, NULL, NULL, NULL, '2022-05-22 14:56:10', '2022-05-22 14:56:10'),
-(37, 'vest', '10', '17', 0, NULL, '', 'this is vest', '202205222042vest.jpg', 300, '', 0, '', NULL, NULL, NULL, NULL, '2022-05-22 14:57:07', '2022-05-22 14:57:07'),
-(38, 'laptop dell', '9', '15', 0, NULL, '', 'vostro dell i7 32', '202205222042laptop.png', 150000, '', 0, '', NULL, NULL, NULL, NULL, '2022-05-22 14:57:58', '2022-05-22 14:57:58'),
-(39, 'samsung mobile', '9', '13', 0, NULL, '', 'samsung galaxy j99', '202205222043samsung-galaxy-a33-5g.jpg', 35000, '', 0, '', NULL, NULL, NULL, NULL, '2022-05-22 14:58:48', '2022-05-22 14:58:48'),
-(40, 'Sari', '10', '16', 0, NULL, '', 'red sari', '202205240037saari.jpg', 1222, '', 0, '', NULL, NULL, NULL, NULL, '2022-05-23 18:49:55', '2022-05-23 18:52:10'),
-(41, 'berger food', '13', '18', 0, NULL, '', 'non vej berger food bread', '202205252053food.jpg', 123, '', 0, '', NULL, NULL, NULL, NULL, '2022-05-25 15:08:58', '2022-05-25 15:08:58'),
-(42, 'Balen glass', '11', '19', 12, NULL, 'pieces', 'this is balen glasses', 'null', 3, 'percent', 21, 'percent', 23, NULL, NULL, NULL, '2022-06-05 03:48:09', '2022-06-05 03:48:09');
+(49, 'vest', '10', '17', 3, NULL, 'pieces', 'this is vest', '[\"202206060956vest.jpg\"]', 200, 'percent', 5, 'percent', 2, NULL, 0, NULL, '2022-06-06 04:11:17', '2022-06-06 04:11:17'),
+(50, 'Sari', '10', '16', 4, NULL, 'pieces', 'this is saaro', '[\"202206061958saari.jpg\",\"202206061958saari2.jpeg\"]', 500, 'percent', 10, 'percent', 20, NULL, 0, NULL, '2022-06-06 14:13:23', '2022-06-06 14:13:23'),
+(51, 'samsung mobile', '9', '13', 5, NULL, 'pieces', 'this is mobile', '[\"202206061959samsung-galaxy-a33-5g.jpg\",\"202206061959samsung-galaxy-a52s-5g.jpg\"]', 3000, 'flat', 50, 'percent', 60, NULL, 0, NULL, '2022-06-06 14:14:30', '2022-06-06 14:14:30'),
+(52, 'laptop', '9', '15', 7, NULL, 'pieces', 'this is dell i5 vostro', '[\"202206062001laptop.png\"]', 100000, 'percent', 20, 'percent', 50, NULL, 0, NULL, '2022-06-06 14:16:10', '2022-06-06 14:16:10'),
+(53, 'berger food', '13', '18', 5, NULL, 'pieces', 'veg berger', '[\"202206062002food.jpg\"]', 10, 'flat', 80, 'percent', 20, NULL, 0, NULL, '2022-06-06 14:17:52', '2022-06-06 14:17:52'),
+(54, 'bed wood', '17', '20', 4, NULL, 'pieces', 'this is bed', '[\"202206062005furniture.jpeg\"]', 10, 'percent', 2, 'flat', 3, NULL, 0, NULL, '2022-06-06 14:20:20', '2022-06-06 14:20:20'),
+(55, 'saari', '10', '16', 20, NULL, 'pieces', 'latest saari', '[\"202206062006saari2.jpeg\"]', 1000, 'flat', 43, 'percent', 19, NULL, 0, NULL, '2022-06-06 14:21:54', '2022-06-06 14:21:54'),
+(56, 'green vegitable', '15', '21', 10, NULL, 'kg', 'vegitable', '[\"202206062009vegitable.jpeg\"]', 95, 'flat', 0, 'flat', 20, NULL, 0, NULL, '2022-06-06 14:24:22', '2022-06-06 14:24:22'),
+(57, 'Dell vostro', '9', '15', 23, NULL, 'pieces', 'this is vostro', '[\"202206080138laptop.png\"]', 490000, 'flat', 230, 'flat', 23, '0', 0, NULL, '2022-06-07 19:53:53', '2022-06-07 19:53:53'),
+(60, 'vest', '10', '17', 89, NULL, 'pieces', 'kjhjkjhkj', '[\"202206080659vest.jpg\"]', 4, 'flat', 98, 'flat', 89, '0', 78, NULL, '2022-06-08 01:14:31', '2022-06-08 01:14:31');
 
 -- --------------------------------------------------------
 
@@ -320,7 +342,8 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (3, 2),
 (4, 2),
 (4, 3),
-(5, 2);
+(5, 2),
+(6, 3);
 
 -- --------------------------------------------------------
 
@@ -337,7 +360,6 @@ CREATE TABLE `shippingaddresses` (
   `state` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `googleLocation` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payment_type` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -347,8 +369,13 @@ CREATE TABLE `shippingaddresses` (
 -- Dumping data for table `shippingaddresses`
 --
 
-INSERT INTO `shippingaddresses` (`id`, `name`, `number`, `email`, `city_town_village`, `state`, `googleLocation`, `user_id`, `payment_type`, `status`, `created_at`, `updated_at`) VALUES
-(11, 'Manoj das', '9808059156', 'mddasgudiya@gmail.com', 'janakpur', 'janakpur', 'google link', '1', NULL, 'On delivery', '2022-05-31 19:42:36', '2022-06-01 15:36:26');
+INSERT INTO `shippingaddresses` (`id`, `name`, `number`, `email`, `city_town_village`, `state`, `googleLocation`, `user_id`, `status`, `created_at`, `updated_at`) VALUES
+(17, 'Md das', '9808059156', 'mddasgudiya@gmail.com', 'KTM', 'Bagmati', 'location', '1', NULL, '2022-06-07 15:14:41', '2022-06-07 15:14:41'),
+(18, 'e', '213', 'qw!@d.x', 'afs', 'fd', 'wew', '1', NULL, '2022-06-07 17:34:51', '2022-06-07 17:34:51'),
+(19, 'lksdddfl', '2332', 'customer@example.com', 'sdskfjl', 'sldkdf;lk', 'sdfdk', '1', NULL, '2022-06-07 17:59:19', '2022-06-07 17:59:19'),
+(20, 'aksjhda', '2283098', 'customer@example.com', 'slkdd', 'lklasa', 'asalkdkl', '1', NULL, '2022-06-07 18:03:17', '2022-06-07 18:03:17'),
+(21, 'asd', '1234', 'A@A.A', 'ASAd', 'ADS', 'ED', '1', NULL, '2022-06-07 20:10:38', '2022-06-07 20:10:38'),
+(22, 'MD das', '9807704794', 'manojdas.py@gmail.com', 'rajbiraj', 'Mithla', 'location', '4', NULL, '2022-06-08 19:46:11', '2022-06-08 19:46:11');
 
 -- --------------------------------------------------------
 
@@ -374,7 +401,9 @@ INSERT INTO `subcategories` (`id`, `name`, `image`, `created_at`, `updated_at`) 
 (16, 'Saaries', '202205222039saari.jpg', '2022-05-22 14:54:14', '2022-05-22 14:54:14'),
 (17, 'Male clothes', '202205222039vest.jpg', '2022-05-22 14:54:57', '2022-05-22 14:54:57'),
 (18, 'veg food', '202205252052food.jpg', '2022-05-25 15:07:32', '2022-05-25 15:07:32'),
-(19, 'glass', '202206050846glass.jpeg', '2022-06-05 03:01:14', '2022-06-05 03:01:14');
+(19, 'glass', '202206050846glass.jpeg', '2022-06-05 03:01:14', '2022-06-05 03:01:14'),
+(20, 'room_wood', '202206062004furniture.jpeg', '2022-06-06 14:19:18', '2022-06-06 14:19:18'),
+(21, 'green vegitable', '202206062008vegitable.jpeg', '2022-06-06 14:23:04', '2022-06-06 14:23:04');
 
 -- --------------------------------------------------------
 
@@ -398,9 +427,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Manoj das', 'mddasgudiya@gmail.com', NULL, '$2y$10$ck0o1VVneDkSJfpcSe/DJeVz/UIqzSD2YBVFGeHy2h/XUXi6yCXAu', NULL, '2022-05-18 18:56:33', '2022-05-18 18:56:33'),
+(1, 'Manmoj das', 'mddasgudiya@gmail.com', NULL, '$2y$10$ck0o1VVneDkSJfpcSe/DJeVz/UIqzSD2YBVFGeHy2h/XUXi6yCXAu', NULL, '2022-05-18 18:56:33', '2022-05-18 18:56:33'),
 (3, 'Bipin sir', 'neplovip@gmail.com', NULL, '$2y$10$h5dwc1HtmPMwxHFW0EyW7Ofg8p9blntPDPd2WFIIxgZzQ9P9I0MN.', NULL, '2022-05-19 19:10:28', '2022-05-19 19:10:28'),
-(4, 'Roshan', 'roshan@gmail.com', NULL, '$2y$10$vJi17gjRtffwizOskCTbY.c15VKjv4rjTZysR./QEpp6dHf.TNjaO', NULL, '2022-06-01 14:21:35', '2022-06-01 14:21:35');
+(4, 'Md', 'manojdas.py@gmail.com', NULL, '$2y$10$7jsArVwTjQwLxd7E.31GrOgW2fuunXdFuGTCLRmFnkWlnu5mVfH56', NULL, '2022-06-01 14:21:35', '2022-06-06 03:56:23');
 
 --
 -- Indexes for dumped tables
@@ -450,6 +479,12 @@ ALTER TABLE `model_has_permissions`
 ALTER TABLE `model_has_roles`
   ADD PRIMARY KEY (`role_id`,`model_id`,`model_type`),
   ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `password_resets`
@@ -519,7 +554,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -531,7 +566,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `categoryhassubcategories`
 --
 ALTER TABLE `categoryhassubcategories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -543,13 +578,19 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -561,7 +602,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -573,13 +614,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `shippingaddresses`
 --
 ALTER TABLE `shippingaddresses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `subcategories`
 --
 ALTER TABLE `subcategories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `users`
