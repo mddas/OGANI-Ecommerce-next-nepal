@@ -95,16 +95,35 @@
       <td>{{$totalPrice}}</td>
       
       <td><a href="#">
-        @if($data['payment_type']=="COD" || $data['payment_type']==null)
-        <button type="button" class="btn btn-danger" onclick='cancel("$data["id"]","/cartdelete")'>Payment Pending*</button></a></td>
-        @elseif($data['payment_type']=="E-SEWA")
-        <button type="button" class="btn btn-success" onclick='cancel("$data["id"]","/cartdelete")'>Payment Success*</button></a></td>
-        @endif
+        <form action="#" method="get">
+          <select id="status">
+            <option value="COD" @if($data['payment_type']=='COD') || $data['payment_type']==null) selected @endif>Unpaid*</option>
+            <option value="E-SEWA" @if($data['payment_type']=='E-SEWA') selected @endif>
+              Paid*
+            </option>
 
-      <td>
+      </select>
+      </form>
+      <td>            
+
+          <!-----dropdown action------>
+
+          <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-ellipsis-v"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="/track?order_id={{$data['order_id']}}">view</a>
+              <a class="dropdown-item" href="#" onclick="deLete({{$data['id']}},'/order_delete')">Delete</a>
+              <a class="dropdown-item" href="#" onclick="update_order_status({{$data['id']}},'order_status_update')">Update</a>
+              <a class="dropdown-item" href="/order_cancel?order_id={{$data['order_id']}}">Cancel</a>
+            </div>
+          </div>
+
+          <!-----dropdown action closed--->  
+
         
-        <!----roledelete/?id=$d['id']--->
-        <a href="/track?order_id={{$data['order_id']}}"><button type="button" class="btn btn-danger">VIEW</button></a>
         <!----<a href="#"><button type="button" class="btn btn-danger" onclick='cancel("$data["id"]","/cartdelete")'>CANCEL</button></a>
         <a href="#"><button type="button" class="btn btn-danger" onclick='cancel("$data["id"]","/cartdelete")'>DELETE</button></a>
           ----->

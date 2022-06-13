@@ -109,7 +109,10 @@ Route::get('order',[OrderController::class, 'order']);
 Route::get('track',[OrderController::class,'track']);
 
 //AdminTracker
-
 Route::get('trace_user',[AdminTrackerController::class,'index']);
+Route::get("order_status_update",[AdminTrackerController::class,'update']);
+Route::get("order_delete",[AdminTrackerController::class,'delete']);
+Route::get("order_cancel",[AdminTrackerController::class,'cancel']);
+
 
 require __DIR__.'/auth.php';
