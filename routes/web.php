@@ -117,6 +117,8 @@ Route::get("order_cancel",[AdminTrackerController::class,'cancel']);
 
 //E-SEWA
 Route::get('esewa_paymenet',[EsewaController::class,'payment']);//when user submit form as e-sewa
+Route::get('esewa_payment_success',[EsewaController::class,'paymentSuccess']);//when user submit form as e-sewa
+Route::get('esewa_payment_failed',[EsewaController::class,'paymentFailed']);//when user submit form as e-sewa
 
 
 require __DIR__.'/auth.php';

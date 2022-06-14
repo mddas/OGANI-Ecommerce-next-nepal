@@ -456,6 +456,18 @@ function searchSet(setWord){
     $("#autocompleteInput").val(setWord);
 }
 
+function PaymentFormActionChange(value){
+    //alert("change");
+    if(value=="COD"){
+     $('#paymentform').attr('action', '/billingaddress');
+     $('#paymentform').attr('method', 'get');
+    }
+    else if(value=="E-SEWA"){
+        $('#paymentform').attr('action', 'https://uat.esewa.com.np/epay/main');
+        $('#paymentform').attr('method', 'post');
+    }
+}
+
 </script>
 <!---end sort by price--->
 </body>

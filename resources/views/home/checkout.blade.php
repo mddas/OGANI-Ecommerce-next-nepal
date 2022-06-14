@@ -38,7 +38,7 @@
                       <!----this is already added address----->
                  <div class="card" style="width: 28rem;">
                       <div class="card-body">
-                        <form action="/billingaddress" method="GET">
+                        <form id="paymentform" action="https://uat.esewa.com.np/epay/main" method="POST">
                             @csrf
                         <div class="row">
                             <div class="col-2">
@@ -54,11 +54,29 @@
                           <li class="list-group-item">Name:{{$shippingaddress['name']}}</li>
                           <li class="list-group-item">shipping address:{{$shippingaddress['city_town_village']}}</li>
                           <li class="list-group-item">Mobile Number:{{$shippingaddress['number']}}</li>
-                          <li class="list-group-item"><div class="row"><div class="col-sm"><label>COD:</label><input type="radio" name="payment_type" value="COD" checked></div><div class="col-sm"><label>E-SEWA:</label><input type="radio" name="payment_type" value="E-SEWA"></div></div></li>
+                          <li class="list-group-item"><div class="row"><div class="col-sm"><label>COD:</label><input type="radio" name="payment_type" value="COD" checked onchange="PaymentFormActionChange(this.value)"></div><div class="col-sm"><label>E-SEWA:</label><input type="radio" name="payment_type" value="E-SEWA" onchange="PaymentFormActionChange(this.value)"></div></div></li>
                         </ul>
                         <center>
-                            <input type="hidden" name="action" value="update">
-                         <input class="btn btn-primary" type="submit" value="select"></center>
+                         <input type="hidden" name="action" value="update">
+                         
+
+                         <!----E-sewa payment---->
+
+                        <form >
+                        <input value="{{App\Http\Controllers\CartController::getTotalPriceOfUser()+10}}" name="tAmt" type="hidden">
+                        <input value="{{App\Http\Controllers\CartController::getTotalPriceOfUser()}}" name="amt" type="hidden">
+                        <input value="5" name="txAmt" type="hidden">
+                        <input value="2" name="psc" type="hidden">
+                        <input value="3" name="pdc" type="hidden">
+                        <input value="EPAYTEST" name="scd" type="hidden">
+                        <input value="ee2c3ca1-696b-4cc5-a6be-2c40d929d453" name="pid" type="hidden">
+                        <input value="http://127.0.0.1:8000/esewa_payment_success?q=su" type="hidden" name="su">
+                        <input value="http://127.0.0.1:8000/esewa_payment_failed?q=fu" type="hidden" name="fu">
+                        <input class="btn btn-primary" value="Submit" type="submit">
+                       
+
+                         <!---E-sewa payment----->
+                        </center>
                        </form>
                       </div>
                     </div>
