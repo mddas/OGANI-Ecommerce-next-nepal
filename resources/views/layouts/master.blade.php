@@ -268,8 +268,9 @@ Swal.fire({
 })
 }
 
-function update_order_status(id,routeUrl){
-	payment_type = $('#status').val()
+function update_order_status(id,routeUrl,payment_type){
+	//payment_type = $('#status').val()
+	//alert(payment_type)
 	Swal.fire({
   title: 'Do you want to update?',
   showCancelButton: true,

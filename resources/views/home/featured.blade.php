@@ -27,22 +27,29 @@
                 <!-------products list--->
                 @foreach($products as $product)
                 <div class="col-lg-3 col-md-4 col-sm-6 mix {{$product['getSubcategory']['name']}}">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="/product/@if(json_decode($product['image'])!=null){{json_decode($product['image'])[0]}}@endif">
-                            <ul class="featured__item__pic__hover">
+                    <div class="product__discount__item">
+                      <div class="product__discount__item__pic set-bg" data-setbg="/product/@if(json_decode($product['image'])!=null){{json_decode($product['image'])[0]}}@endif">
+                        @if($product->discount>0)
+                         <div class="product__discount__percent">-Rs.{{$product->discount}}</div>
+                        @endif
+                            <ul class="product__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                
                                 <li><a href="#?" onclick="addToCart({{$product->id}},'/insertcart','add')"><i class="fa fa-shopping-cart" onclick="addToCart({{$product->id}},'/insertcart','add')"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="/shoapdetail?id={{$product['id']}}">{{$product['name']}}</a></h6>
-                            <h5>Rs.{{$product['price']}}</h5>
-                        </div>
-                    </div>
+                             </ul>
+                       </div>
+                         <div class="product__discount__item__text">
+                           <span>Dried Fruit</span>
+                             <h5><a href="/shoapdetail?id={{$product['id']}}">{{$product['name']}}</a></h5>
+                              <div class="product__item__price">{{$product->price-$product['discount']}}@if($product->discount>0)<span>Rs .{{$product->price}}</span>
+                                @endif
+                              </div>
+                          </div>
+                      </div>
                 </div>
                 @endforeach
+                
             </div>
         </div>
     </section>

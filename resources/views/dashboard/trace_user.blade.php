@@ -96,7 +96,7 @@
       
       <td><a href="#">
         <form action="#" method="get">
-          <select id="status" onchange="update_order_status({{$data['id']}},'order_status_update')">
+          <select id="status" onchange="update_order_status({{$data['id']}},'order_status_update',this.value)">
             <option value="COD" @if($data['payment_type']=='COD') || $data['payment_type']==null) selected @endif>Unpaid*</option>
             <option value="E-SEWA" @if($data['payment_type']=='E-SEWA') selected @endif>
               Paid*
@@ -116,7 +116,6 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <a class="dropdown-item" href="/track?order_id={{$data['order_id']}}">view</a>
               <a class="dropdown-item" href="#" onclick="deLete({{$data['id']}},'/order_delete')">Delete</a>
-              <a class="dropdown-item" href="#" onclick="update_order_status({{$data['id']}},'order_status_update')">Update</a>
               @if($data['cancel']==0)
               <a class="dropdown-item" href="#" onclick="update_order_cancel({{$data['id']}},'order_cancel',1)">Cancel</a>
               @elseif($data['cancel']==1)

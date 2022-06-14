@@ -119,7 +119,7 @@ class CartController extends Controller
             $price=0;
             //return $carts;
             foreach($carts as $cart){
-                $price =$price + $cart->product->price; 
+                $price =$price + $cart->product->price*$cart->quantity; 
              }
             return $price;
         }

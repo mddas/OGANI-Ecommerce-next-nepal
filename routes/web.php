@@ -17,6 +17,7 @@ use App\Http\Controllers\AdminTrackerController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserdashboardController;
+use App\Http\Controllers\EsewaController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 use App\Models\Product;
@@ -102,7 +103,7 @@ Route::get('shoapdetail',[ShoapdetailController::class,'index']);
 
 //checkout
 Route::get('checkout' , [CheckoutController::class , 'index']);
-Route::get('billingaddress', [CheckoutController::class , 'insert']);
+Route::get('billingaddress', [CheckoutController::class , 'insert']);//choose as E-sewa
 
 //user Dashboard
 Route::get('order',[OrderController::class, 'order']);
@@ -113,6 +114,9 @@ Route::get('trace_user',[AdminTrackerController::class,'index']);
 Route::get("order_status_update",[AdminTrackerController::class,'update']);
 Route::get("order_delete",[AdminTrackerController::class,'delete']);
 Route::get("order_cancel",[AdminTrackerController::class,'cancel']);
+
+//E-SEWA
+Route::get('esewa_paymenet',[EsewaController::class,'payment']);//when user submit form as e-sewa
 
 
 require __DIR__.'/auth.php';

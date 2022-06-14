@@ -203,6 +203,11 @@
 @yield('categories')
 <!----end categories section--->
 
+<!----Discount------------->
+@yield('discount')
+<!---end discount---------->
+
+
 <!----featured start------->
 @yield('featured')
 <!----feaatured stop--------->
@@ -226,10 +231,6 @@
 <!---checkout---------->
 @yield('checkout')
 <!---------------------->
-
-<!---searched_grid------>
-@yield('searched_grid')
-<!---end searched grid-->
 
 <!----user login-------->
 @yield('userlogin')

@@ -12,6 +12,7 @@
                                 <tr>
                                     <th class="shoping__product">Products</th>
                                     <th>Price</th>
+                                    <th>Discount</th>
                                     <th>Quantity</th>
                                     <th>Total</th>
                                     <th></th>
@@ -19,7 +20,13 @@
                             </thead>
                             <tbody>
                                 @if(Illuminate\Support\Facades\Auth::check()==1)
+                                @php
+                                    $Totaldiscount = 0;
+                                @endphp
                                 @foreach($carts as $cart)
+                                @php
+                                    $Totaldiscount = $Totaldiscount + $cart->product->discount*$cart->quantity;
+                                @endphp
                                 <tr id="{{$cart->id}}">
                                     <td class="shoping__cart__item">
                                         <!--json_decode($data['image'])--->
@@ -29,6 +36,7 @@
                                     <td class="shoping__cart__price">
                                         Rs.{{$cart->product->price}}
                                     </td>
+                                    <td>Rs.{{$cart->product->discount}}</td>
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
@@ -37,7 +45,7 @@
                                         </div>
                                     </td>
                                     <td class="shoping__cart__total">
-                                        Rs.{{$cart->product->price}}
+                                        Rs.{{$cart->product->price*$cart->quantity}}
                                     </td>
                                     <td class="shoping__cart__item__close">
                                         <span class="icon_close" onclick='deLete({{$cart->id}},"/cartdelete")'></span>
@@ -104,6 +112,7 @@
                         <h5>Cart Total</h5>
                         <ul>
                             <li>Shipping Fee <span>Rs.0</span></li>
+                            <li>Total Discount  <span>{{$Totaldiscount}}</span></li>
 
                             <li>Total <span>Rs.{{App\Http\Controllers\CartController::getTotalPriceOfUser()}}</span></li>
                         </ul>

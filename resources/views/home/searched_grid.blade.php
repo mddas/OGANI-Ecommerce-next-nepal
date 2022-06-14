@@ -206,7 +206,7 @@
                         @foreach($products as $product)
                         <div class="col-lg-4 col-md-6 col-sm-6 sortprice_products">
                             <div class="product__item"><!--delete node--->
-                                <div class="product__item__pic set-bg" data-setbg="/product/{{$product['image']}}">
+                                <div class="product__item__pic set-bg" data-setbg="/product/{{json_decode($product['image'])[0]}}">
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
