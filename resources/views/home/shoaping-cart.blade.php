@@ -112,8 +112,9 @@
                         <h5>Cart Total</h5>
                         <ul>
                             <li>Shipping Fee <span>Rs.0</span></li>
+                            @if(Illuminate\Support\Facades\Auth::check()==1)
                             <li>Total Discount  <span>{{$Totaldiscount}}</span></li>
-
+                            @endif
                             <li>Total <span>Rs.{{App\Http\Controllers\CartController::getTotalPriceOfUser()}}</span></li>
                         </ul>
                         <a href="/checkout" class="primary-btn">PROCEED TO CHECKOUT</a>
